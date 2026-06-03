@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import "./faq.css";
 
 /* ⭐ API BASE URL */
-const API = process.env.REACT_APP_API_URL || "http://10.145.35.253:5000/api";
+const API = process.env.REACT_APP_API_URL || "https://smsinfra-website.onrender.com/api";
 
 const DEFAULT_FAQ_DATA = [
   {

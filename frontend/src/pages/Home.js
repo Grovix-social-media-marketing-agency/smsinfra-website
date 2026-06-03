@@ -20,7 +20,7 @@ import FAQ from "../components/home/FAQ";
 import AnnouncementBanner from "../components/common/AnnouncementBanner";
 
 /* ⭐ API BASE URL */
-const API = process.env.REACT_APP_API_URL || "http://10.145.35.253:5000/api";
+const API = process.env.REACT_APP_API_URL || "https://smsinfra-website.onrender.com/api";
 
 /* ⭐ LOCAL FALLBACK LOGOS — always present as the base set */
 const LOCAL_LOGOS = [

@@ -404,7 +404,7 @@ const MultiStepForm = ({ selectedJob, onSuccess }) => {
         if (formData[key]) submitData.append(key, formData[key]);
       });
 
-      const response = await fetch(`${process.env.REACT_APP_API_URL || "http://10.145.35.253:5000/api"}/careers/apply`, { // ⭐ env-ready
+      const response = await fetch(`${process.env.REACT_APP_API_URL || "https://smsinfra-website.onrender.com/api"}/careers/apply`, { // ⭐ env-ready
         method: "POST",
         body: submitData,
       });
@@ -695,7 +695,7 @@ const Careers = () => {
 
   const fetchJobs = async () => {
     try {
-      const response = await fetch(`${process.env.REACT_APP_API_URL || "http://10.145.35.253:5000/api"}/careers/jobs`); // ⭐ env-ready
+      const response = await fetch(`${process.env.REACT_APP_API_URL || "https://smsinfra-website.onrender.com/api"}/careers/jobs`); // ⭐ env-ready
       const data = await response.json();
       // ⭐ If DB has jobs use them, otherwise show defaults so page is never blank
       setJobs(Array.isArray(data) && data.length > 0 ? data : DEFAULT_JOBS);

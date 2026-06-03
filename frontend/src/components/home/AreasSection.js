@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 
 /* ⭐ API BASE URL */
-const API = process.env.REACT_APP_API_URL || "http://10.145.35.253:5000/api";
+const API = process.env.REACT_APP_API_URL || "https://smsinfra-website.onrender.com/api";
 
 /* ⭐ FALLBACK — exact original hardcoded values */
 const DEFAULT_AREAS_DATA = {

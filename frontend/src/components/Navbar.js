@@ -23,7 +23,7 @@ export default function Navbar() {
 
   // 🔥 FETCH CMS (SAFE)
   useEffect(() => {
-    fetch("http://10.145.35.253:5000/api/cms") // local/dev
+    fetch("https://smsinfra-website.onrender.com/api/cms") // local/dev
       .catch(() => fetch(`${process.env.REACT_APP_API_URL || "http://10.145.35.253:5000"}/api/cms`)) // ⭐ production fallback
       .then(res => res.json())
       .then(data => {

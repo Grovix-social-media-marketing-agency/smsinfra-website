@@ -15,7 +15,7 @@ import {
 } from "react-icons/fa";
 
 /* ⭐ API BASE URL */
-const API = process.env.REACT_APP_API_URL || "http://10.145.35.253:5000/api";
+const API = process.env.REACT_APP_API_URL || "https://smsinfra-website.onrender.com/api";
 
 /* ⭐ ICON MAP — resolves DB string name to React Icon component */
 const ICON_MAP = {

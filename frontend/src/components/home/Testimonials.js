@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef, useCallback } from "react";
 import "./Testimonials.css";
 
 /* ⭐ API BASE URL */
-const API = process.env.REACT_APP_API_URL || "http://10.145.35.253:5000/api";
+const API = process.env.REACT_APP_API_URL || "https://smsinfra-website.onrender.com/api";
 
 /* ORIGINAL DATA */
 const initialReviews = [
