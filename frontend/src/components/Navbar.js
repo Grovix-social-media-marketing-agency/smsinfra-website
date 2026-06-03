@@ -134,7 +134,7 @@ export default function Navbar() {
 
           {/* LOGO */}
           <div className="logo" onClick={() => { navigate("/"); handleNavClick(); }}>
-            <img src={cms?.navbar?.logo || "/logo.png"} alt="logo" />
+            <img src={cms?.navbar?.logo || "/Logo.png"} alt="logo" />
             <span>SMS INFRA</span>
           </div>
 
