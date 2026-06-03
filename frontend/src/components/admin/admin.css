@@ -1,0 +1,908 @@
+/* ═══════════════════════════════════════════════════════════════════
+   SMS INFRA — ADMIN DASHBOARD CSS
+   Aesthetic: Warm Ivory + Champagne Gold — Refined Editorial Luxury
+   Font: Poppins (all weights)
+   Scope: .admin-* classes only — zero bleed to other pages
+═══════════════════════════════════════════════════════════════════ */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+/* ── Root tokens ─────────────────────────────────────────────────── */
+:root {
+  --adm-bg:           #f7f4ef;
+  --adm-bg2:          #efe9e0;
+  --adm-surface:      #ffffff;
+  --adm-surface2:     #fdf9f4;
+  --adm-border:       #e2d9ce;
+  --adm-border2:      #d4c8b8;
+
+  --adm-gold:         #b8935a;
+  --adm-gold-light:   #d4ae78;
+  --adm-gold-pale:    #f0e4d0;
+  --adm-gold-glow:    rgba(184, 147, 90, 0.18);
+
+  --adm-text-primary:   #2c2416;
+  --adm-text-secondary: #6b5c48;
+  --adm-text-muted:     #a8967f;
+  --adm-text-faint:     #c4b49e;
+
+  --adm-green:        #4a7c59;
+  --adm-green-pale:   #e8f3ec;
+  --adm-red:          #9b3e3e;
+  --adm-red-pale:     #faeaea;
+  --adm-amber:        #a07030;
+  --adm-amber-pale:   #fdf3e3;
+  --adm-blue:         #3a5f8a;
+  --adm-blue-pale:    #eaf0f8;
+
+  --adm-sidebar-w:    260px;
+  --adm-radius:       14px;
+  --adm-radius-sm:    8px;
+  --adm-shadow:       0 2px 16px rgba(44,36,22,0.08), 0 1px 4px rgba(44,36,22,0.04);
+  --adm-shadow-lg:    0 8px 40px rgba(44,36,22,0.12), 0 2px 8px rgba(44,36,22,0.06);
+  --adm-font:         'Poppins', sans-serif;
+  --adm-transition:   all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ── Layout shell ────────────────────────────────────────────────── */
+.admin-container {
+  display: flex;
+  min-height: 100vh;
+  background: var(--adm-bg);
+  font-family: var(--adm-font);
+  color: var(--adm-text-primary);
+  position: relative;
+}
+
+/* Subtle grain overlay on the whole dashboard */
+.admin-container::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  opacity: 0.5;
+}
+
+/* ── Sidebar ─────────────────────────────────────────────────────── */
+.admin-sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: var(--adm-sidebar-w);
+  background: var(--adm-surface);
+  border-right: 1px solid var(--adm-border);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 0 0 24px;
+  overflow-y: auto;
+  z-index: 100;
+  box-shadow: 2px 0 24px rgba(44,36,22,0.07);
+  scrollbar-width: thin;
+  scrollbar-color: var(--adm-border2) transparent;
+}
+
+.admin-sidebar::-webkit-scrollbar {
+  width: 4px;
+}
+.admin-sidebar::-webkit-scrollbar-track {
+  background: transparent;
+}
+.admin-sidebar::-webkit-scrollbar-thumb {
+  background: var(--adm-border2);
+  border-radius: 4px;
+}
+
+/* Sidebar brand header */
+.admin-sidebar h2 {
+  font-family: var(--adm-font);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--adm-gold);
+  padding: 28px 24px 20px;
+  margin: 0;
+  border-bottom: 1px solid var(--adm-border);
+  background: linear-gradient(135deg, #fdf9f4 0%, #f7f1e8 100%);
+  position: relative;
+}
+
+.admin-sidebar h2::before {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 24px;
+  right: 24px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--adm-gold), transparent);
+  border-radius: 2px;
+}
+
+/* Sidebar nav buttons */
+.admin-sidebar button {
+  width: calc(100% - 16px);
+  margin: 0 8px;
+  background: transparent;
+  border: none;
+  border-radius: var(--adm-radius-sm);
+  padding: 10px 16px;
+  text-align: left;
+  font-family: var(--adm-font);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--adm-text-secondary);
+  cursor: pointer;
+  transition: var(--adm-transition);
+  position: relative;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.admin-sidebar button::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%) scaleY(0);
+  width: 3px;
+  height: 60%;
+  background: var(--adm-gold);
+  border-radius: 0 3px 3px 0;
+  transition: transform 0.2s ease;
+}
+
+.admin-sidebar button:hover {
+  background: var(--adm-gold-pale);
+  color: var(--adm-text-primary);
+  padding-left: 22px;
+}
+
+.admin-sidebar button:hover::before {
+  transform: translateY(-50%) scaleY(1);
+}
+
+.admin-sidebar button:active {
+  background: var(--adm-gold-glow);
+}
+
+/* ── Main content area ───────────────────────────────────────────── */
+.admin-content {
+  margin-left: var(--adm-sidebar-w);
+  flex: 1;
+  padding: 40px 48px;
+  max-width: calc(100vw - var(--adm-sidebar-w));
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+
+/* ── Section container ───────────────────────────────────────────── */
+.admin-section {
+  width: 100%;
+  max-width: 780px;
+  background: var(--adm-surface);
+  border: 1px solid var(--adm-border);
+  border-radius: 20px;
+  padding: 40px 44px;
+  box-shadow: var(--adm-shadow);
+  position: relative;
+  overflow: hidden;
+  animation: adm-fadeSlideUp 0.35s ease both;
+}
+
+@keyframes adm-fadeSlideUp {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Top accent bar */
+.admin-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--adm-gold), var(--adm-gold-light), transparent 70%);
+}
+
+/* Corner watermark */
+.admin-section::after {
+  content: 'SMS';
+  position: absolute;
+  top: 14px;
+  right: 20px;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.2em;
+  color: var(--adm-border2);
+  opacity: 0.6;
+}
+
+/* Section heading */
+.admin-section h2 {
+  font-family: var(--adm-font);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--adm-text-primary);
+  margin: 0 0 28px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--adm-border);
+  position: relative;
+  letter-spacing: -0.01em;
+}
+
+.admin-section h2::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 48px;
+  height: 2px;
+  background: var(--adm-gold);
+  border-radius: 2px;
+}
+
+.admin-section h3 {
+  font-family: var(--adm-font);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--adm-text-secondary);
+  margin: 0 0 14px;
+  letter-spacing: 0.02em;
+}
+
+/* ── Form field blocks ───────────────────────────────────────────── */
+.admin-section input[type="text"],
+.admin-section input[type="number"],
+.admin-section input[type="email"],
+.admin-section input[type="password"],
+.admin-section input[type="file"],
+.admin-section textarea,
+.admin-section select {
+  font-family: var(--adm-font);
+  font-size: 13.5px;
+  font-weight: 400;
+  color: var(--adm-text-primary);
+  background: var(--adm-bg);
+  border: 1.5px solid var(--adm-border);
+  border-radius: var(--adm-radius-sm);
+  padding: 10px 14px;
+  width: 100%;
+  box-sizing: border-box;
+  outline: none;
+  transition: var(--adm-transition);
+  margin-bottom: 0;
+}
+
+.admin-section input[type="text"]:focus,
+.admin-section input[type="number"]:focus,
+.admin-section input[type="email"]:focus,
+.admin-section textarea:focus,
+.admin-section select:focus {
+  border-color: var(--adm-gold);
+  background: #fffef9;
+  box-shadow: 0 0 0 3px var(--adm-gold-glow);
+}
+
+.admin-section input::placeholder,
+.admin-section textarea::placeholder {
+  color: var(--adm-text-faint);
+  font-style: italic;
+}
+
+.admin-section textarea {
+  resize: vertical;
+  min-height: 80px;
+  line-height: 1.6;
+}
+
+.admin-section select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23a8967f' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  padding-right: 36px;
+  cursor: pointer;
+}
+
+.admin-section input[type="file"] {
+  padding: 9px 14px;
+  cursor: pointer;
+  font-size: 12.5px;
+  color: var(--adm-text-muted);
+}
+
+.admin-section input[type="file"]::-webkit-file-upload-button {
+  font-family: var(--adm-font);
+  font-size: 12px;
+  font-weight: 600;
+  background: var(--adm-gold-pale);
+  color: var(--adm-gold);
+  border: 1px solid var(--adm-gold-light);
+  border-radius: 6px;
+  padding: 5px 12px;
+  cursor: pointer;
+  transition: var(--adm-transition);
+  margin-right: 10px;
+}
+
+.admin-section input[type="file"]::-webkit-file-upload-button:hover {
+  background: var(--adm-gold);
+  color: #fff;
+}
+
+/* ── Field card wrappers (inline style overrides via CSS vars) ────── */
+/* These target the inline-style divs via compound selectors */
+.admin-section > div[style*="border: 1px dashed"],
+.admin-section div[style*="border: 1px dashed #444"] {
+  background: var(--adm-surface2) !important;
+  border: 1.5px dashed var(--adm-border2) !important;
+  border-radius: var(--adm-radius) !important;
+  padding: 18px 20px !important;
+  margin-bottom: 14px !important;
+  transition: var(--adm-transition) !important;
+}
+
+/* ── Buttons ──────────────────────────────────────────────────────── */
+
+/* Primary save button */
+.admin-section .save-btn,
+.admin-section button.save-btn {
+  font-family: var(--adm-font);
+  font-size: 13.5px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  background: linear-gradient(135deg, var(--adm-gold) 0%, var(--adm-gold-light) 100%);
+  color: #fff;
+  border: none;
+  border-radius: var(--adm-radius-sm);
+  padding: 12px 24px;
+  cursor: pointer;
+  transition: var(--adm-transition);
+  box-shadow: 0 3px 14px rgba(184,147,90,0.35);
+  position: relative;
+  overflow: hidden;
+}
+
+.admin-section .save-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.18) 0%, transparent 60%);
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.admin-section .save-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 22px rgba(184,147,90,0.42);
+}
+
+.admin-section .save-btn:hover::before {
+  opacity: 1;
+}
+
+.admin-section .save-btn:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(184,147,90,0.3);
+}
+
+.admin-section .save-btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Ghost / secondary button (inline styles — class hook via element) */
+.admin-section button:not(.save-btn) {
+  font-family: var(--adm-font);
+  font-size: 13px;
+  font-weight: 500;
+  background: var(--adm-surface2);
+  color: var(--adm-text-secondary);
+  border: 1.5px solid var(--adm-border);
+  border-radius: var(--adm-radius-sm);
+  padding: 9px 18px;
+  cursor: pointer;
+  transition: var(--adm-transition);
+}
+
+.admin-section button:not(.save-btn):hover:not(:disabled) {
+  background: var(--adm-gold-pale);
+  border-color: var(--adm-gold-light);
+  color: var(--adm-gold);
+}
+
+/* Danger button */
+.admin-section button[style*="fca5a5"],
+.admin-section button[style*="rgba(255,0,0"] {
+  background: var(--adm-red-pale) !important;
+  color: var(--adm-red) !important;
+  border: 1.5px solid #f0cccc !important;
+}
+
+.admin-section button[style*="fca5a5"]:hover,
+.admin-section button[style*="rgba(255,0,0"]:hover {
+  background: #f5d4d4 !important;
+}
+
+/* ── Status badge strips ─────────────────────────────────────────── */
+/* "Currently live" info box */
+.admin-section div[style*="rgba(110,231,183,0.06)"] {
+  background: var(--adm-green-pale) !important;
+  border-color: #b6d9c2 !important;
+  border-radius: var(--adm-radius-sm) !important;
+  padding: 12px 16px !important;
+}
+
+/* Warning / unsaved changes box */
+.admin-section div[style*="rgba(255,165,0,0.1)"],
+.admin-section div[style*="rgba(255,165,0,0.08)"] {
+  background: var(--adm-amber-pale) !important;
+  border-color: #e8c87a !important;
+  border-radius: var(--adm-radius-sm) !important;
+}
+
+/* Error / orphan warning box */
+/* Info note box */
+.admin-section div[style*="rgba(110,231,183,0.05)"] {
+  background: #f2faf5 !important;
+  border-color: #c8e8d4 !important;
+}
+
+/* ── Announcement type buttons ───────────────────────────────────── */
+.admin-section div[style*="gap: 10px"] > button[style*="orange"] {
+  border-color: var(--adm-gold) !important;
+  color: var(--adm-gold) !important;
+  background: var(--adm-gold-pale) !important;
+}
+
+/* ── Loading state ───────────────────────────────────────────────── */
+.admin-loading {
+  font-family: var(--adm-font);
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--adm-text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: var(--adm-bg);
+  margin: 0;
+  letter-spacing: 0.05em;
+}
+
+.admin-loading::after {
+  content: ' ·';
+  animation: adm-dots 1.4s steps(3, end) infinite;
+}
+
+@keyframes adm-dots {
+  0%,20%  { content: ' ·'; }
+  40%     { content: ' ··'; }
+  60%,100%{ content: ' ···'; }
+}
+
+/* ── Card rows (service cards, area cards, reviews, FAQ) ─────────── */
+.admin-section div[style*="border: 1px solid #333"] {
+  background: var(--adm-surface2) !important;
+  border: 1.5px solid var(--adm-border) !important;
+  border-radius: var(--adm-radius) !important;
+  transition: box-shadow 0.2s ease, border-color 0.2s ease !important;
+}
+
+.admin-section div[style*="border: 1px solid #333"]:hover {
+  border-color: var(--adm-border2) !important;
+  box-shadow: 0 4px 16px rgba(44,36,22,0.07) !important;
+}
+
+/* ── Ticker pill tags ────────────────────────────────────────────── */
+.admin-section div[style*="rgba(110,231,183,0.1)"][style*="borderRadius: 20px"] {
+  background: var(--adm-gold-pale) !important;
+  border-color: var(--adm-gold-light) !important;
+  color: var(--adm-gold) !important;
+}
+
+/* ── Gallery image cards ─────────────────────────────────────────── */
+.admin-section div[style*="width: 200px"] {
+  background: var(--adm-surface2) !important;
+  border: 1.5px solid var(--adm-border) !important;
+  border-radius: 12px !important;
+  transition: var(--adm-transition) !important;
+  overflow: hidden !important;
+}
+
+.admin-section div[style*="width: 200px"]:hover {
+  border-color: var(--adm-gold-light) !important;
+  box-shadow: 0 6px 20px rgba(184,147,90,0.15) !important;
+  transform: translateY(-2px) !important;
+}
+
+/* Static badge */
+.admin-section span[style*="6ee7b7"][style*="fontWeight: 700"] {
+  color: var(--adm-green) !important;
+  background: var(--adm-green-pale);
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 9px !important;
+  display: inline-block;
+}
+
+/* ── Client logos drag row ───────────────────────────────────────── */
+.admin-section div[style*="cursor: grab"] {
+  background: var(--adm-surface2) !important;
+  border: 1.5px solid var(--adm-border) !important;
+  border-radius: var(--adm-radius-sm) !important;
+  transition: var(--adm-transition) !important;
+}
+
+.admin-section div[style*="cursor: grab"]:hover {
+  border-color: var(--adm-gold-light) !important;
+  box-shadow: var(--adm-shadow) !important;
+}
+
+/* ── Announcement history items ──────────────────────────────────── */
+.admin-section div[style*="background: rgba(255,255,255,0.05)"] {
+  background: var(--adm-surface2) !important;
+  border: 1.5px solid var(--adm-border) !important;
+  border-radius: var(--adm-radius) !important;
+  transition: var(--adm-transition) !important;
+}
+
+/* Live announcement highlight */
+.admin-section div[style*="border: 1px solid orange"] {
+  background: #fffbf0 !important;
+  border: 1.5px solid var(--adm-gold-light) !important;
+  border-radius: var(--adm-radius) !important;
+}
+
+/* ── Job / application / quotation cards ─────────────────────────── */
+.admin-section div[style*="background: rgba(255,255,255,0.04)"][style*="border: 1px solid #333"] {
+  background: var(--adm-surface2) !important;
+  border: 1.5px solid var(--adm-border) !important;
+  border-radius: var(--adm-radius) !important;
+}
+
+/* ── Status select (applications, jobs) ──────────────────────────── */
+.admin-section select[style*="background: #1a1a2e"] {
+  background: var(--adm-bg) !important;
+  color: var(--adm-text-primary) !important;
+  border-color: var(--adm-border) !important;
+}
+
+/* ── Inline icon picker panel ────────────────────────────────────── */
+.admin-section div[style*="background: #1a1a2e"][style*="flexWrap: wrap"] {
+  background: var(--adm-surface) !important;
+  border: 1.5px solid var(--adm-border) !important;
+  border-radius: var(--adm-radius) !important;
+  box-shadow: var(--adm-shadow-lg) !important;
+}
+
+.admin-section div[style*="background: #1a1a2e"] button[style*="background: rgba(255,255,255,0.05)"] {
+  background: var(--adm-bg) !important;
+  border-color: var(--adm-border) !important;
+  color: var(--adm-gold) !important;
+  border-radius: 8px !important;
+  transition: var(--adm-transition) !important;
+}
+
+.admin-section div[style*="background: #1a1a2e"] button:hover {
+  background: var(--adm-gold-pale) !important;
+  border-color: var(--adm-gold-light) !important;
+}
+
+/* ── Label micro text ────────────────────────────────────────────── */
+.admin-section span[style*="fontSize: 11"][style*="color: #888"] {
+  color: var(--adm-text-muted) !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.08em !important;
+}
+
+/* ── Inline p / hint text ────────────────────────────────────────── */
+.admin-section p[style*="fontSize: 11"],
+.admin-section p[style*="fontSize: 12"] {
+  font-family: var(--adm-font) !important;
+}
+
+/* ── HR / divider lines ──────────────────────────────────────────── */
+.admin-section div[style*="borderTop: 1px solid #2a2a2a"],
+.admin-section div[style*="borderBottom: 1px solid #2a2a2a"] {
+  border-color: var(--adm-border) !important;
+}
+
+/* ── Section sub heading after h2 ────────────────────────────────── */
+.admin-section h3[style*="color: #e0e0ff"] {
+  color: var(--adm-text-primary) !important;
+  font-weight: 600 !important;
+}
+
+/* ── Status text colors: green success ───────────────────────────── */
+.admin-section p[style*="color: #6ee7b7"],
+.admin-section span[style*="color: #6ee7b7"] {
+  color: var(--adm-green) !important;
+}
+
+/* Amber warning */
+.admin-section p[style*="color: #f5a623"],
+.admin-section span[style*="color: #f5a623"] {
+  color: var(--adm-amber) !important;
+}
+
+/* Red error */
+.admin-section p[style*="color: #fca5a5"],
+.admin-section span[style*="color: #fca5a5"] {
+  color: var(--adm-red) !important;
+}
+
+/* ── Character counter / small help text ─────────────────────────── */
+.admin-section p[style*="textAlign: right"][style*="fontSize: 12"] {
+  color: var(--adm-text-faint) !important;
+  font-size: 11px !important;
+}
+
+/* ── Toggle buttons (active/inactive job status) ─────────────────── */
+.admin-section button[style*="rgba(110,231,183,0.15)"] {
+  background: var(--adm-green-pale) !important;
+  color: var(--adm-green) !important;
+  border: 1.5px solid #b6d9c2 !important;
+}
+
+.admin-section button[style*="rgba(255,255,255,0.06)"][style*="666"] {
+  background: var(--adm-bg) !important;
+  color: var(--adm-text-muted) !important;
+  border: 1.5px solid var(--adm-border) !important;
+}
+
+/* ── Deactivate all / action buttons top bar ─────────────────────── */
+.admin-section span[style*="rgba(255,165,0,0.15)"] {
+  background: var(--adm-amber-pale) !important;
+  border-color: #e0b860 !important;
+  color: var(--adm-amber) !important;
+  font-weight: 700 !important;
+}
+
+.admin-section span[style*="rgba(255,255,255,0.06)"][style*="fontSize: 12"] {
+  background: var(--adm-bg) !important;
+  border-color: var(--adm-border) !important;
+  color: var(--adm-text-muted) !important;
+}
+
+/* ── Refresh button (quotations) ─────────────────────────────────── */
+.admin-section button[style*="rgba(110,231,183,0.08)"] {
+  background: var(--adm-green-pale) !important;
+  border-color: #b6d9c2 !important;
+  color: var(--adm-green) !important;
+}
+
+/* ── Image preview in gallery ─────────────────────────────────────  */
+.admin-section img {
+  border-radius: 8px;
+  display: block;
+}
+
+/* ── Code/pre spans ──────────────────────────────────────────────── */
+.admin-section code {
+  font-family: 'SF Mono', 'Fira Mono', monospace;
+  font-size: 11.5px;
+  background: var(--adm-gold-pale);
+  color: var(--adm-gold);
+  padding: 2px 7px;
+  border-radius: 4px;
+}
+
+/* ── Link colors ─────────────────────────────────────────────────── */
+.admin-section a {
+  color: var(--adm-gold);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.15s;
+}
+
+.admin-section a:hover {
+  color: var(--adm-gold-light);
+  text-decoration: underline;
+}
+
+/* ── Checkbox / radio (if any) ───────────────────────────────────── */
+.admin-section input[type="checkbox"],
+.admin-section input[type="radio"] {
+  accent-color: var(--adm-gold);
+}
+
+/* ── Order change banner ─────────────────────────────────────────── */
+.admin-section div[style*="rgba(110,231,183,0.06)"][style*="border: 1px solid rgba(110,231,183,0.2)"] {
+  background: var(--adm-green-pale) !important;
+  border-color: #b6d9c2 !important;
+}
+
+/* ── Contact page section dividers ───────────────────────────────── */
+.admin-section h3[style*="borderBottom: 1px solid #2a2a2a"] {
+  border-color: var(--adm-border) !important;
+  color: var(--adm-text-primary) !important;
+  padding-bottom: 10px !important;
+  margin-top: 28px !important;
+}
+
+/* ── Toast / inline toast text ───────────────────────────────────── */
+.admin-section p[style*="fontWeight: 600"][style*="marginBottom: 12"] {
+  background: var(--adm-green-pale);
+  border: 1px solid #b6d9c2;
+  border-radius: var(--adm-radius-sm);
+  padding: 10px 16px !important;
+  color: var(--adm-green) !important;
+  font-size: 13px !important;
+}
+
+/* ── Textarea char limit hint ────────────────────────────────────── */
+.admin-section p[style*="color: #888"][style*="textAlign: right"] {
+  color: var(--adm-text-faint) !important;
+}
+
+/* ── Scrollbar for content area ──────────────────────────────────── */
+.admin-content::-webkit-scrollbar {
+  width: 6px;
+}
+.admin-content::-webkit-scrollbar-track {
+  background: transparent;
+}
+.admin-content::-webkit-scrollbar-thumb {
+  background: var(--adm-border2);
+  border-radius: 6px;
+}
+
+/* ── Responsive ──────────────────────────────────────────────────── */
+@media (max-width: 1100px) {
+  .admin-content {
+    padding: 28px 24px;
+  }
+}
+
+@media (max-width: 768px) {
+  :root {
+    --adm-sidebar-w: 220px;
+  }
+  .admin-section {
+    padding: 28px 24px;
+    border-radius: 14px;
+  }
+  .admin-section h2 {
+    font-size: 19px;
+  }
+}
+
+@media (max-width: 600px) {
+  .admin-container {
+    flex-direction: column;
+  }
+  .admin-sidebar {
+    position: relative;
+    width: 100%;
+    height: auto;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 12px;
+    gap: 4px;
+    border-right: none;
+    border-bottom: 1px solid var(--adm-border);
+  }
+  .admin-sidebar h2 {
+    width: 100%;
+    padding: 12px 16px;
+    font-size: 12px;
+  }
+  .admin-sidebar button {
+    width: auto;
+    padding: 7px 12px;
+    font-size: 11.5px;
+    flex: 0 0 auto;
+    margin: 2px;
+  }
+  .admin-content {
+    margin-left: 0;
+    max-width: 100%;
+    padding: 20px 16px;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   SIDEBAR SECTION DIVIDERS
+   Groups in sidebar for visual hierarchy
+═══════════════════════════════════════════════════════════════════ */
+
+/* Add a subtle group label before specific buttons using + sibling trick */
+.admin-sidebar button:first-of-type {
+  margin-top: 8px;
+}
+
+/* Hover shimmer effect on save button */
+@keyframes adm-shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+.admin-section .save-btn:not(:disabled):hover {
+  background-size: 200% auto;
+  animation: adm-shimmer 1.4s linear infinite;
+  background-image: linear-gradient(
+    135deg,
+    var(--adm-gold) 0%,
+    var(--adm-gold-light) 40%,
+    #e8c990 50%,
+    var(--adm-gold-light) 60%,
+    var(--adm-gold) 100%
+  );
+}
+
+/* ── Empty state italic texts ────────────────────────────────────── */
+.admin-section p[style*="fontStyle: italic"] {
+  color: var(--adm-text-faint) !important;
+  background: var(--adm-bg);
+  border: 1.5px dashed var(--adm-border);
+  border-radius: var(--adm-radius-sm);
+  padding: 16px 20px !important;
+  text-align: center;
+  font-size: 13px !important;
+}
+
+/* ── Highlighted info note at bottom of tab ──────────────────────── */
+.admin-section div[style*="border: 1px solid rgba(110,231,183,0.15)"],
+.admin-section div[style*="border: 1px solid rgba(110,231,183,0.12)"] {
+  background: #f2faf5 !important;
+  border: 1.5px solid #c8e8d4 !important;
+  border-radius: var(--adm-radius-sm) !important;
+}
+
+/* ── Quotation status color tints via select ─────────────────────── */
+.admin-section select option {
+  background: var(--adm-surface);
+  color: var(--adm-text-primary);
+}
+
+/* ── Phone/email anchor links in quotations ──────────────────────── */
+.admin-section a[href^="tel:"],
+.admin-section a[href^="mailto:"] {
+  color: var(--adm-gold) !important;
+  font-weight: 500;
+}
+
+/* ── Section top border accent (used in some sub-sections) ───────── */
+.admin-section > div > h3[style*="borderBottom"] {
+  color: var(--adm-text-primary) !important;
+}
+
+/* ── Admin section p descriptions ────────────────────────────────── */
+.admin-section > p[style*="fontSize: 12"] {
+  color: var(--adm-text-muted) !important;
+  font-size: 13px !important;
+  margin-bottom: 20px !important;
+  line-height: 1.65;
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   FINE DETAILS — makes the panel feel truly crafted
+═══════════════════════════════════════════════════════════════════ */
+
+/* Focus ring globally for keyboard accessibility */
+.admin-section *:focus-visible {
+  outline: 2px solid var(--adm-gold);
+  outline-offset: 2px;
+}
+
+/* Smooth page load */
+.admin-container {
+  animation: adm-pageIn 0.4s ease both;
+}
+
+@keyframes adm-pageIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}

@@ -1,0 +1,348 @@
+/* -------------------------------------------------------------------------- */
+/* 1. BRAND COLORS & CONFIG (Matched to Reference)                            */
+/* -------------------------------------------------------------------------- */
+:root {
+  --brand-orange: #ff9e16;      /* Vivid Construction Orange */
+  --brand-dark: #0a0d12;        /* Deep Navy-Black from image */
+  --text-white: #f6e6c6;        /* Creamy Heading White */
+  --text-dim: #a0a0a0;          /* Muted Grey for subtext */
+  --divider-line: rgba(255, 158, 22, 0.2);
+}
+
+.why-section {
+  position: relative;
+  background-color: var(--brand-dark);
+  color: var(--text-white);
+  padding: 120px 8%;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  counter-reset: feature-counter;
+}
+
+/* SUBTLE SMS WATERMARK */
+.why-section::before {
+  content: "SMS";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 28vw;
+  font-weight: 900;
+  color: rgba(255, 255, 255, 0.015);
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* -------------------------------------------------------------------------- */
+/* 2. LAYOUT ENGINE                                                           */
+/* -------------------------------------------------------------------------- */
+.why-container {
+  position: relative;
+  z-index: 2;
+  max-width: 1400px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 80px;
+  align-items: center;
+}
+
+/* -------------------------------------------------------------------------- */
+/* 3. LEFT CONTENT (Refined Typography)                                       */
+/* -------------------------------------------------------------------------- */
+.why-tag {
+  color: var(--brand-orange);
+  font-weight: 800;
+  font-size: 0.85rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.why-title {
+  color: var(--text-white);
+  font-size: clamp(2rem, 4.5vw, 3.5rem); 
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 2.5rem;
+  position: relative;
+}
+
+/* Reference-matched Gold Underline */
+.why-title::after {
+  content: "";
+  display: block;
+  width: 80px;
+  height: 3px;
+  background: var(--brand-orange);
+  margin: 20px 0;
+  border-radius: 2px;
+}
+
+.why-text {
+  color: var(--text-dim);
+  font-size: 1.1rem;
+  line-height: 1.8;
+  max-width: 550px;
+  margin-bottom: 1.5rem;
+}
+
+.why-stats {
+  display: flex;
+  gap: 45px;
+  margin-top: 40px;
+}
+
+.stat-box h3 {
+  font-size: 2.8rem;
+  color: var(--text-white);
+  font-weight: 800;
+}
+
+.stat-box p {
+  color: var(--brand-orange);
+  font-size: 0.7rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* -------------------------------------------------------------------------- */
+/* 4. RIGHT CONTENT (Elegant Reveal List)                                     */
+/* -------------------------------------------------------------------------- */
+.why-right {
+  border-top: 1px solid var(--divider-line);
+}
+
+.why-card {
+  position: relative;
+  padding: 2rem 0;
+  border-bottom: 1px solid var(--divider-line);
+  cursor: pointer;
+  transition: all 0.4s ease;
+}
+
+.flip-front h3 {
+  color: var(--text-white);
+  font-size: 1.3rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.flip-front h3::before {
+  counter-increment: feature-counter;
+  content: "0" counter(feature-counter);
+  font-size: 0.75rem;
+  color: var(--brand-orange);
+  font-weight: 900;
+}
+
+.flip-back {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: all 0.4s ease;
+  color: var(--text-dim);
+  font-size: 0.95rem;
+}
+
+.why-card:hover {
+  padding-left: 15px;
+}
+
+.why-card:hover .flip-back {
+  max-height: 100px;
+  opacity: 1;
+  margin-top: 10px;
+}
+
+.why-card:hover .flip-front h3 {
+  color: var(--brand-orange);
+}
+
+.flip-inner { transform: none !important; }
+
+/* -------------------------------------------------------------------------- */
+/* 5. REFINED BUTTON (Compact Mobile Version)                                 */
+/* -------------------------------------------------------------------------- */
+.why-btn {
+  background-color: var(--brand-orange);
+  color: #000;
+  padding: 16px 40px;
+  border-radius: 4px; /* Industrial sharp edges */
+  font-weight: 800;
+  border: none;
+  cursor: pointer;
+  margin-top: 35px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  font-size: 0.85rem;
+  transition: 0.3s transform, 0.3s box-shadow;
+}
+
+.why-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(255, 158, 22, 0.3);
+}
+
+/* -------------------------------------------------------------------------- */
+/* 6. PROPER MOBILE ADAPTATION (Strict 2x2)                                   */
+/* -------------------------------------------------------------------------- */
+@media (max-width: 1100px) {
+  .why-container {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 60px;
+  }
+  .why-left { display: flex; flex-direction: column; align-items: center; }
+  .why-title::after { margin: 20px auto 0; }
+  .why-stats { justify-content: center; }
+  .why-right { margin: 0 auto; width: 100%; max-width: 650px; }
+}
+
+@media (max-width: 600px) {
+  .why-section { padding: 60px 20px; }
+
+  /* 2x2 MOBILE TILES */
+  .why-right {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    border: none;
+  }
+
+  .why-card {
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--divider-line);
+    border-radius: 6px;
+    text-align: center;
+    height: auto;
+    min-height: 110px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .why-card:hover { padding-left: 15px; }
+
+  .flip-front h3 { 
+    font-size: 0.85rem; 
+    justify-content: center; 
+  }
+  .flip-front h3::before { display: none; }
+
+  .flip-back {
+    max-height: none;
+    opacity: 0.7;
+    font-size: 0.7rem;
+    margin-top: 5px;
+    display: block;
+  }
+
+  /* Compact Mobile Button */
+  .why-btn {
+    width: auto;
+    min-width: 180px;
+    margin: 30px auto 0;
+    padding: 12px 25px;
+    font-size: 0.75rem; /* Reduced for mobile elegance */
+  }
+}
+/* -------------------------------------------------------------------------- */
+/* ENHANCED VISIBILITY SMS WATERMARK (Solid + Animated)                       */
+/* -------------------------------------------------------------------------- */
+
+.why-section::before {
+  content: "SMS";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  
+  /* Size and Impact */
+  font-size: clamp(15rem, 30vw, 40rem);
+  font-weight: 900;
+  letter-spacing: -15px;
+  line-height: 1;
+  z-index: 0;
+  pointer-events: none;
+  
+  /* Visible Color & Gradient */
+  color: rgba(255, 255, 255, 0.03); /* Increased base visibility */
+  background: linear-gradient(
+    120deg, 
+    transparent 20%, 
+    rgba(232, 176, 51, 0.15) 50%, 
+    transparent 80%
+  );
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  
+  /* Stronger Outline for definition */
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.05);
+  
+  /* Animations */
+  animation: 
+    sms-float 12s infinite alternate ease-in-out,
+    sms-scan 6s infinite linear;
+}
+
+/* 1. THE DRIFT: Keeps it moving so it's not a static block */
+@keyframes sms-float {
+  from {
+    transform: translate(-52%, -48%) scale(1);
+    filter: blur(2px);
+  }
+  to {
+    transform: translate(-48%, -52%) scale(1.08);
+    filter: blur(0px);
+  }
+}
+
+/* 2. THE SCAN: A gold light beam that passes through the letters */
+@keyframes sms-scan {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* 3. MOBILE: Adjusting for smaller screens */
+@media (max-width: 768px) {
+  .why-section::before {
+    font-size: 40vw;
+    letter-spacing: -5px;
+    color: rgba(255, 255, 255, 0.04); /* Even more visible on mobile */
+    -webkit-text-stroke: 0.5px rgba(255, 255, 255, 0.1);
+    animation: sms-float 8s infinite alternate ease-in-out;
+  }
+}
+/* Ensure the waterfall container doesn't cause horizontal scroll on mobile */
+@media (max-width: 1100px) {
+  .why-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+  }
+}
+
+/* Structural fix for 'M' in the background watermark */
+@media (max-width: 768px) {
+  .why-section::before {
+    font-size: 35vw !important;
+    letter-spacing: 0.05em !important; /* Forces the M to stay structured */
+    color: rgba(255, 255, 255, 0.03) !important;
+    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.1) !important;
+    transform: translate(-50%, -50%) !important; /* Keeps it centered */
+  }
+}

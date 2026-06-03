@@ -1,0 +1,346 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700;900&display=swap');
+
+/* ══════════════════════════════════════════
+   ROOT — full-screen dark overlay
+   z-index 9999 sits above everything
+══════════════════════════════════════════ */
+.sms-loader-root {
+  position: fixed;
+  inset: 0;
+  background: #080808;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  overflow: hidden;
+  font-family: 'Montserrat', sans-serif;
+
+  /* Entry: already visible, no animation needed */
+  transform: translateY(0);
+  transition: none;
+}
+
+/* ── Slide-up exit ── */
+.sms-loader-root.sms-exiting {
+  transform: translateY(-100%);
+  transition: transform 0.9s cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+/* ══════════════════════════════════════════
+   CANVAS
+══════════════════════════════════════════ */
+.sms-canvas {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* ══════════════════════════════════════════
+   WRAPPER
+══════════════════════════════════════════ */
+.sms-wrap {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ══════════════════════════════════════════
+   RING
+══════════════════════════════════════════ */
+.sms-ring-wrap {
+  position: relative;
+  width: 320px;
+  height: 320px;
+  margin-bottom: 36px;
+}
+
+.sms-ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 1.5px solid transparent;
+}
+.sms-r1 { inset: 0;    border-top-color: #F5C200; border-right-color: #F5C200; animation: sms-sp 1.4s linear infinite; }
+.sms-r2 { inset: 16px; border-bottom-color: rgba(245,194,0,0.4); border-left-color: rgba(245,194,0,0.4); animation: sms-sp 2.4s linear infinite reverse; }
+.sms-r3 { inset: 32px; border-top-color: rgba(245,194,0,0.15); animation: sms-sp 4s linear infinite; }
+.sms-r4 { inset: 48px; border: 1px solid rgba(245,194,0,0.06); animation: sms-sp 8s linear infinite reverse; }
+@keyframes sms-sp { to { transform: rotate(360deg); } }
+
+.sms-ticks {
+  position: absolute;
+  inset: 0;
+  animation: sms-sp 1.4s linear infinite;
+}
+.sms-tick {
+  position: absolute;
+  width: 2px;
+  background: #F5C200;
+  left: 50%;
+  transform-origin: 1px 160px;
+  border-radius: 1px;
+}
+
+.sms-orbit-track {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px dashed rgba(245,194,0,0.07);
+  width: 280px; height: 280px;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.sms-ring-center {
+  position: absolute;
+  inset: 88px;
+  border-radius: 50%;
+  background: #0e0e0e;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(245,194,0,0.15);
+  box-shadow: 0 0 30px rgba(245,194,0,0.06) inset;
+  z-index: 5;
+}
+.sms-ring-logo {
+  font-weight: 900;
+  font-size: 20px;
+  color: #F5C200;
+  letter-spacing: 1px;
+  line-height: 1;
+}
+.sms-ring-logo span {
+  display: block;
+  font-size: 7px;
+  font-weight: 300;
+  color: rgba(255,255,255,0.25);
+  letter-spacing: 4px;
+  margin-top: 3px;
+  text-transform: uppercase;
+}
+
+/* ══════════════════════════════════════════
+   ORBITING ICONS
+══════════════════════════════════════════ */
+.sms-orbit-container {
+  position: absolute;
+  inset: 0;
+}
+.sms-orbit-item {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform-origin: 0 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  cursor: default;
+}
+.sms-orbit-icon {
+  width: 46px; height: 46px;
+  border-radius: 10px;
+  background: #141414;
+  border: 1px solid rgba(245,194,0,0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  box-shadow: 0 0 14px rgba(245,194,0,0.1);
+  flex-shrink: 0;
+}
+.sms-orbit-label {
+  font-size: 7px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  color: rgba(245,194,0,0.7);
+  text-transform: uppercase;
+  white-space: nowrap;
+  background: #080808;
+  padding: 1px 4px;
+  border-radius: 2px;
+}
+
+/* ══════════════════════════════════════════
+   BRAND
+══════════════════════════════════════════ */
+.sms-brand-name {
+  font-size: 52px;
+  font-weight: 900;
+  color: #fff;
+  letter-spacing: 8px;
+  text-transform: uppercase;
+  line-height: 1;
+  margin-bottom: 5px;
+  animation: sms-fadeUp 0.9s cubic-bezier(0.22,1,0.36,1) forwards;
+  opacity: 0;
+}
+.sms-brand-name em { color: #F5C200; font-style: normal; }
+
+.sms-underline-wrap {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 8px;
+}
+.sms-underline {
+  height: 2px;
+  background: #F5C200;
+  width: 0;
+  animation: sms-expandW 0.7s cubic-bezier(0.22,1,0.36,1) forwards 0.6s;
+  box-shadow: 0 0 10px rgba(245,194,0,0.5);
+}
+@keyframes sms-expandW { to { width: 260px; } }
+
+.sms-tagline {
+  font-size: 9px;
+  letter-spacing: 7px;
+  color: rgba(255,255,255,0.18);
+  text-transform: uppercase;
+  font-weight: 300;
+  margin-bottom: 44px;
+  animation: sms-fadeUp 0.8s ease forwards 0.4s;
+  opacity: 0;
+}
+
+@keyframes sms-fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ══════════════════════════════════════════
+   PROGRESS
+══════════════════════════════════════════ */
+.sms-progress-area {
+  width: 320px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  animation: sms-fadeUp 0.8s ease forwards 0.6s;
+  opacity: 0;
+}
+
+.sms-pct-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 2px;
+}
+.sms-pct-n {
+  font-size: 84px;
+  font-weight: 900;
+  color: #fff;
+  line-height: 1;
+  letter-spacing: -4px;
+  min-width: 115px;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+.sms-pct-sym {
+  font-size: 34px;
+  font-weight: 300;
+  color: rgba(245,194,0,0.5);
+  margin-top: 14px;
+}
+
+.sms-seg-bar {
+  width: 100%;
+  display: flex;
+  gap: 2px;
+}
+.sms-seg {
+  flex: 1;
+  height: 3px;
+  background: rgba(255,255,255,0.04);
+  border-radius: 1px;
+  transition: background 0.25s, box-shadow 0.25s;
+  position: relative;
+  overflow: hidden;
+}
+.sms-seg-on { background: #F5C200; }
+.sms-seg-on.sms-seg-glow { box-shadow: 0 0 10px rgba(245,194,0,0.8); }
+.sms-seg-on::after {
+  content: '';
+  position: absolute;
+  top: 0; left: -80%;
+  width: 50%; height: 100%;
+  background: rgba(255,255,255,0.5);
+  animation: sms-shim 2s ease infinite;
+}
+@keyframes sms-shim { to { left: 200%; } }
+
+.sms-thin-track {
+  width: 100%;
+  height: 1px;
+  background: rgba(255,255,255,0.04);
+  position: relative;
+}
+.sms-thin-fill {
+  height: 1px;
+  background: #F5C200;
+  width: 0%;
+  transition: width 0.35s ease;
+  position: relative;
+  box-shadow: 0 0 6px rgba(245,194,0,0.5);
+}
+.sms-glow-dot {
+  position: absolute;
+  right: -5px; top: -4.5px;
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: #F5C200;
+  box-shadow: 0 0 18px 6px rgba(245,194,0,0.8);
+}
+
+.sms-status-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.sms-s-dot {
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: #F5C200;
+  box-shadow: 0 0 8px #F5C200;
+  animation: sms-blink 1s ease infinite;
+}
+@keyframes sms-blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.15; }
+}
+.sms-s-msg {
+  font-size: 9px;
+  letter-spacing: 3px;
+  color: rgba(255,255,255,0.18);
+  text-transform: uppercase;
+  transition: opacity 0.4s;
+}
+
+/* ══════════════════════════════════════════
+   CORNER BRACKETS & WATERMARK
+══════════════════════════════════════════ */
+.sms-corner {
+  position: absolute;
+  width: 28px; height: 28px;
+  border-color: rgba(245,194,0,0.18);
+  border-style: solid;
+}
+.sms-c-tl { top: 22px;    left: 22px;    border-width: 1.5px 0 0 1.5px; }
+.sms-c-tr { top: 22px;    right: 22px;   border-width: 1.5px 1.5px 0 0; }
+.sms-c-bl { bottom: 22px; left: 22px;    border-width: 0 0 1.5px 1.5px; }
+.sms-c-br { bottom: 22px; right: 22px;   border-width: 0 1.5px 1.5px 0; }
+
+.sms-watermark {
+  position: absolute;
+  bottom: 22px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 8px;
+  letter-spacing: 4px;
+  color: rgba(255,255,255,0.06);
+  text-transform: uppercase;
+  font-family: 'Montserrat', sans-serif;
+}

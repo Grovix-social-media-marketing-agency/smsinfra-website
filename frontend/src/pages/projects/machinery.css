@@ -1,0 +1,1095 @@
+/* ================================================================
+   machinery.css
+   Scoped entirely to .machinery-page — zero bleed to other pages.
+   Elegant light-industrial theme · Fade + slide-in animations
+   Desktop-first with full mobile breakpoints
+================================================================ */
+
+/* ---------------------------------------------------------------
+   CSS VARIABLES  (local scope)
+--------------------------------------------------------------- */
+.machinery-page {
+  --m-bg:          #f5f3ef;          /* warm off-white */
+  --m-surface:     #ffffff;
+  --m-surface-2:   #edeae4;
+  --m-border:      #d9d4cb;
+
+  --m-text:        #1a1714;
+  --m-text-2:      #4a453e;
+  --m-text-3:      #7a746c;
+
+  --m-accent:      #c4853a;          /* amber-gold */
+  --m-accent-dark: #a36928;
+  --m-accent-light:#f0d5b0;
+
+  --m-dark:        #1e1b17;
+  --m-dark-2:      #2c2820;
+
+  --m-font-display: 'Georgia', 'Times New Roman', serif;
+  --m-font-body:    'Segoe UI', 'Helvetica Neue', sans-serif;
+
+  --m-radius:      6px;
+  --m-radius-lg:   12px;
+  --m-shadow:      0 2px 12px rgba(0,0,0,.08);
+  --m-shadow-md:   0 6px 28px rgba(0,0,0,.12);
+  --m-shadow-lg:   0 16px 56px rgba(0,0,0,.16);
+
+  --m-ease:        cubic-bezier(.25,.46,.45,.94);
+  --m-ease-spring: cubic-bezier(.34,1.56,.64,1);
+
+  /* animation defaults */
+  --m-dur:         .65s;
+  --m-delay-base:  0s;
+
+  font-family: var(--m-font-body);
+  background: var(--m-bg);
+  color: var(--m-text);
+  overflow-x: hidden;
+}
+
+/* ---------------------------------------------------------------
+   GLOBAL RESETS (scoped)
+--------------------------------------------------------------- */
+.machinery-page *,
+.machinery-page *::before,
+.machinery-page *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.machinery-page a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.machinery-page img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ---------------------------------------------------------------
+   CONTAINER
+--------------------------------------------------------------- */
+.machinery-page .container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+/* ---------------------------------------------------------------
+   SHARED TYPOGRAPHY
+--------------------------------------------------------------- */
+.machinery-page .section-label {
+  display: inline-block;
+  font-size: .72rem;
+  font-weight: 600;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--m-accent);
+  margin-bottom: 14px;
+}
+
+.machinery-page .section-label.light {
+  color: var(--m-accent-light);
+}
+
+.machinery-page .section-heading {
+  margin-bottom: 56px;
+}
+
+.machinery-page .section-heading.center {
+  text-align: center;
+  max-width: 640px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.machinery-page .section-heading h2 {
+  font-family: var(--m-font-display);
+  font-size: clamp(1.75rem, 3vw, 2.4rem);
+  font-weight: 700;
+  line-height: 1.22;
+  color: var(--m-text);
+  margin-bottom: 16px;
+}
+
+.machinery-page .section-heading p {
+  font-size: .97rem;
+  line-height: 1.75;
+  color: var(--m-text-2);
+}
+
+/* ---------------------------------------------------------------
+   SHARED BUTTONS
+--------------------------------------------------------------- */
+.machinery-page .machinery-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 13px 28px;
+  border-radius: var(--m-radius);
+  font-size: .9rem;
+  font-weight: 600;
+  letter-spacing: .02em;
+  transition: all .25s var(--m-ease);
+  cursor: pointer;
+  border: none;
+  white-space: nowrap;
+}
+
+.machinery-page .machinery-btn.primary {
+  background: var(--m-accent);
+  color: #fff;
+  box-shadow: 0 4px 16px rgba(196,133,58,.35);
+}
+
+.machinery-page .machinery-btn.primary:hover {
+  background: var(--m-accent-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(196,133,58,.45);
+}
+
+.machinery-page .machinery-btn.secondary {
+  background: transparent;
+  color: var(--m-text);
+  border: 1.5px solid var(--m-border);
+}
+
+.machinery-page .machinery-btn.secondary:hover {
+  border-color: var(--m-accent);
+  color: var(--m-accent);
+  transform: translateY(-2px);
+}
+
+.machinery-page .machinery-btn.glass {
+  background: rgba(255,255,255,.14);
+  color: #fff;
+  border: 1.5px solid rgba(255,255,255,.35);
+  backdrop-filter: blur(8px);
+}
+
+.machinery-page .machinery-btn.glass:hover {
+  background: rgba(255,255,255,.22);
+  transform: translateY(-2px);
+}
+
+/* ---------------------------------------------------------------
+   REVEAL ANIMATION BASE
+   Elements start hidden; .is-visible triggers the entrance.
+--------------------------------------------------------------- */
+.machinery-page .machinery-hero-content,
+.machinery-page .earthmovers-section .section-heading,
+.machinery-page .earthmovers-layout,
+.machinery-page .crusher-layout,
+.machinery-page .workflow-section .section-heading,
+.machinery-page .workflow-grid,
+.machinery-page .experience-grid {
+  opacity: 0;
+  transform: translateY(36px);
+  transition:
+    opacity var(--m-dur) var(--m-ease),
+    transform var(--m-dur) var(--m-ease);
+}
+
+.machinery-page .machinery-hero-content.is-visible,
+.machinery-page .earthmovers-section.is-visible .section-heading,
+.machinery-page .earthmovers-section.is-visible .earthmovers-layout,
+.machinery-page .crusher-section.is-visible  .crusher-layout,
+.machinery-page .workflow-section.is-visible .section-heading,
+.machinery-page .workflow-section.is-visible .workflow-grid,
+.machinery-page .experience-section.is-visible .experience-grid {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Stagger children inside grids */
+.machinery-page .earthmovers-section.is-visible .earth-card,
+.machinery-page .workflow-section.is-visible   .workflow-card,
+.machinery-page .experience-section.is-visible .experience-card {
+  animation: mRevealUp var(--m-dur) var(--m-ease) both;
+}
+
+.machinery-page .earth-card:nth-child(1)    { animation-delay: .10s; }
+.machinery-page .earth-card:nth-child(2)    { animation-delay: .22s; }
+.machinery-page .earth-card:nth-child(3)    { animation-delay: .34s; }
+
+.machinery-page .workflow-card:nth-child(1) { animation-delay: .08s; }
+.machinery-page .workflow-card:nth-child(2) { animation-delay: .20s; }
+.machinery-page .workflow-card:nth-child(3) { animation-delay: .32s; }
+
+.machinery-page .experience-card:nth-child(1) { animation-delay: .06s; }
+.machinery-page .experience-card:nth-child(2) { animation-delay: .15s; }
+.machinery-page .experience-card:nth-child(3) { animation-delay: .24s; }
+.machinery-page .experience-card:nth-child(4) { animation-delay: .33s; }
+
+@keyframes mRevealUp {
+  from {
+    opacity: 0;
+    transform: translateY(32px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Image fade-in from side */
+.machinery-page .earthmovers-image,
+.machinery-page .crusher-image {
+  opacity: 0;
+  transform: translateX(-28px);
+  transition: opacity .7s var(--m-ease) .15s,
+              transform .7s var(--m-ease) .15s;
+}
+
+.machinery-page .crusher-image {
+  transform: translateX(28px);
+}
+
+.machinery-page .earthmovers-section.is-visible .earthmovers-image,
+.machinery-page .crusher-section.is-visible  .crusher-image {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* ---------------------------------------------------------------
+   HERO SECTION
+--------------------------------------------------------------- */
+.machinery-page .machinery-hero {
+  position: relative;
+  min-height: 92vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  background: var(--m-dark);
+}
+
+.machinery-page .machinery-hero-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  transform: scale(1.04);
+  animation: mHeroBgZoom 18s ease-in-out infinite alternate;
+}
+
+@keyframes mHeroBgZoom {
+  from { transform: scale(1.04); }
+  to   { transform: scale(1.10); }
+}
+
+.machinery-page .machinery-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    110deg,
+    rgba(20,17,12,.82) 0%,
+    rgba(20,17,12,.55) 55%,
+    rgba(20,17,12,.25) 100%
+  );
+  z-index: 1;
+}
+
+.machinery-page .machinery-grid-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background-image:
+    linear-gradient(rgba(196,133,58,.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(196,133,58,.07) 1px, transparent 1px);
+  background-size: 60px 60px;
+  pointer-events: none;
+}
+
+.machinery-page .machinery-hero .container {
+  position: relative;
+  z-index: 3;
+  padding-top: 100px;
+  padding-bottom: 80px;
+}
+
+/* Hero content layout */
+.machinery-page .machinery-hero-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: center;
+  /* reveal override */
+  opacity: 0;
+  transform: translateY(36px);
+  transition: opacity .8s var(--m-ease), transform .8s var(--m-ease);
+}
+
+.machinery-page .machinery-hero-content.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Left */
+.machinery-page .machinery-hero-left {
+  color: #fff;
+}
+
+.machinery-page .machinery-badge {
+  display: inline-block;
+  background: rgba(196,133,58,.18);
+  border: 1px solid rgba(196,133,58,.45);
+  color: var(--m-accent-light);
+  font-size: .72rem;
+  font-weight: 600;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  padding: 6px 14px;
+  border-radius: 100px;
+  margin-bottom: 22px;
+  animation: mBadgePulse 3s ease-in-out infinite;
+}
+
+@keyframes mBadgePulse {
+  0%,100% { box-shadow: 0 0 0   0   rgba(196,133,58,.3); }
+  50%      { box-shadow: 0 0 0 8px rgba(196,133,58,.0); }
+}
+
+.machinery-page .machinery-hero-left h1 {
+  font-family: var(--m-font-display);
+  font-size: clamp(2.1rem, 4.5vw, 3.2rem);
+  font-weight: 700;
+  line-height: 1.16;
+  color: #fff;
+  margin-bottom: 20px;
+}
+
+.machinery-page .machinery-hero-left h1 span {
+  display: block;
+  color: var(--m-accent-light);
+}
+
+.machinery-page .machinery-hero-left p {
+  font-size: 1.02rem;
+  line-height: 1.78;
+  color: rgba(255,255,255,.72);
+  margin-bottom: 36px;
+  max-width: 480px;
+}
+
+.machinery-page .machinery-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+/* Right */
+.machinery-page .machinery-hero-right {
+  position: relative;
+}
+
+.machinery-page .machinery-main-image {
+  position: relative;
+  border-radius: var(--m-radius-lg);
+  overflow: hidden;
+  aspect-ratio: 4/3;
+  box-shadow: var(--m-shadow-lg);
+  border: 1px solid rgba(255,255,255,.1);
+}
+
+.machinery-page .machinery-image-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    transparent 60%,
+    rgba(20,17,12,.5) 100%
+  );
+}
+
+/* ---------------------------------------------------------------
+   EARTHMOVERS SECTION
+--------------------------------------------------------------- */
+.machinery-page .earthmovers-section {
+  padding: 96px 0;
+  background: var(--m-bg);
+  position: relative;
+}
+
+.machinery-page .earthmovers-section::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--m-border), transparent);
+}
+
+.machinery-page .earthmovers-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 56px;
+  align-items: center;
+}
+
+.machinery-page .earthmovers-image {
+  border-radius: var(--m-radius-lg);
+  overflow: hidden;
+  aspect-ratio: 5/4;
+  box-shadow: var(--m-shadow-md);
+  position: relative;
+}
+
+.machinery-page .earthmovers-image::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: var(--m-radius-lg);
+  box-shadow: inset 0 0 0 1px rgba(0,0,0,.08);
+  pointer-events: none;
+}
+
+.machinery-page .earthmovers-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Earth card */
+.machinery-page .earth-card {
+  background: var(--m-surface);
+  border: 1px solid var(--m-border);
+  border-radius: var(--m-radius-lg);
+  padding: 24px 26px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transition: transform .28s var(--m-ease),
+              box-shadow .28s var(--m-ease),
+              border-color .28s var(--m-ease);
+  position: relative;
+  overflow: hidden;
+}
+
+.machinery-page .earth-card::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 3px;
+  background: var(--m-accent);
+  transform: scaleY(0);
+  transform-origin: bottom;
+  transition: transform .3s var(--m-ease);
+  border-radius: 0 0 0 var(--m-radius-lg);
+}
+
+.machinery-page .earth-card:hover {
+  transform: translateX(6px);
+  box-shadow: var(--m-shadow-md);
+  border-color: var(--m-accent-light);
+}
+
+.machinery-page .earth-card:hover::before {
+  transform: scaleY(1);
+}
+
+.machinery-page .earth-icon {
+  width: 44px;
+  height: 44px;
+  background: var(--m-accent-light);
+  border-radius: var(--m-radius);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--m-accent-dark);
+  flex-shrink: 0;
+  margin-bottom: 4px;
+  transition: background .25s var(--m-ease), transform .25s var(--m-ease-spring);
+}
+
+.machinery-page .earth-card:hover .earth-icon {
+  background: var(--m-accent);
+  color: #fff;
+  transform: scale(1.08) rotate(-4deg);
+}
+
+.machinery-page .earth-card h3 {
+  font-family: var(--m-font-display);
+  font-size: 1.02rem;
+  font-weight: 700;
+  color: var(--m-text);
+}
+
+.machinery-page .earth-card p {
+  font-size: .88rem;
+  line-height: 1.65;
+  color: var(--m-text-2);
+}
+
+/* ---------------------------------------------------------------
+   CRUSHER SECTION
+--------------------------------------------------------------- */
+.machinery-page .crusher-section {
+  padding: 96px 0;
+  background: var(--m-surface-2);
+  position: relative;
+}
+
+.machinery-page .crusher-section::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--m-border), transparent);
+}
+
+.machinery-page .crusher-layout {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 64px;
+  align-items: center;
+}
+
+.machinery-page .crusher-content > span {
+  display: block;
+}
+
+.machinery-page .crusher-content h2 {
+  font-family: var(--m-font-display);
+  font-size: clamp(1.65rem, 2.8vw, 2.2rem);
+  font-weight: 700;
+  line-height: 1.24;
+  color: var(--m-text);
+  margin-bottom: 16px;
+}
+
+.machinery-page .crusher-content > p {
+  font-size: .97rem;
+  line-height: 1.75;
+  color: var(--m-text-2);
+  margin-bottom: 36px;
+}
+
+.machinery-page .crusher-points {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+/* Crusher point item */
+.machinery-page .crusher-point {
+  display: flex;
+  gap: 18px;
+  align-items: flex-start;
+  padding: 18px 20px;
+  background: var(--m-surface);
+  border: 1px solid var(--m-border);
+  border-radius: var(--m-radius-lg);
+  transition: transform .25s var(--m-ease),
+              box-shadow .25s var(--m-ease);
+}
+
+.machinery-page .crusher-point:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--m-shadow);
+}
+
+.machinery-page .crusher-point-icon {
+  width: 42px;
+  height: 42px;
+  background: linear-gradient(135deg, var(--m-accent) 0%, var(--m-accent-dark) 100%);
+  border-radius: var(--m-radius);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  flex-shrink: 0;
+}
+
+.machinery-page .crusher-point h4 {
+  font-size: .95rem;
+  font-weight: 700;
+  color: var(--m-text);
+  margin-bottom: 4px;
+}
+
+.machinery-page .crusher-point p {
+  font-size: .86rem;
+  line-height: 1.6;
+  color: var(--m-text-2);
+}
+
+.machinery-page .crusher-image {
+  border-radius: var(--m-radius-lg);
+  overflow: hidden;
+  aspect-ratio: 4/5;
+  box-shadow: var(--m-shadow-lg);
+  position: relative;
+}
+
+.machinery-page .crusher-image::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: var(--m-radius-lg);
+  box-shadow: inset 0 0 0 1px rgba(0,0,0,.08);
+  pointer-events: none;
+}
+
+/* ---------------------------------------------------------------
+   WORKFLOW SECTION
+--------------------------------------------------------------- */
+.machinery-page .workflow-section {
+  padding: 96px 0;
+  background: var(--m-bg);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Decorative background number */
+.machinery-page .workflow-section::after {
+  content: 'EPC';
+  position: absolute;
+  right: -40px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: var(--m-font-display);
+  font-size: 22vw;
+  font-weight: 700;
+  color: rgba(0,0,0,.025);
+  pointer-events: none;
+  user-select: none;
+  line-height: 1;
+}
+
+.machinery-page .workflow-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+  position: relative;
+  z-index: 1;
+}
+
+/* Workflow card */
+.machinery-page .workflow-card {
+  background: var(--m-surface);
+  border: 1px solid var(--m-border);
+  border-radius: var(--m-radius-lg);
+  padding: 36px 30px;
+  position: relative;
+  overflow: hidden;
+  transition: transform .3s var(--m-ease),
+              box-shadow .3s var(--m-ease),
+              border-color .3s var(--m-ease);
+}
+
+.machinery-page .workflow-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--m-accent), var(--m-accent-light));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .35s var(--m-ease);
+}
+
+.machinery-page .workflow-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--m-shadow-md);
+  border-color: var(--m-accent-light);
+}
+
+.machinery-page .workflow-card:hover::after {
+  transform: scaleX(1);
+}
+
+.machinery-page .workflow-number {
+  font-family: var(--m-font-display);
+  font-size: 3rem;
+  font-weight: 700;
+  color: rgba(196,133,58,.12);
+  line-height: 1;
+  margin-bottom: 14px;
+  transition: color .3s var(--m-ease);
+}
+
+.machinery-page .workflow-card:hover .workflow-number {
+  color: rgba(196,133,58,.22);
+}
+
+.machinery-page .workflow-icon {
+  width: 46px;
+  height: 46px;
+  background: var(--m-accent-light);
+  border-radius: var(--m-radius);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--m-accent-dark);
+  margin-bottom: 18px;
+  transition: background .25s var(--m-ease), transform .25s var(--m-ease-spring);
+}
+
+.machinery-page .workflow-card:hover .workflow-icon {
+  background: var(--m-accent);
+  color: #fff;
+  transform: scale(1.1) rotate(6deg);
+}
+
+.machinery-page .workflow-card h3 {
+  font-family: var(--m-font-display);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--m-text);
+  margin-bottom: 10px;
+}
+
+.machinery-page .workflow-card p {
+  font-size: .88rem;
+  line-height: 1.65;
+  color: var(--m-text-2);
+}
+
+/* ---------------------------------------------------------------
+   EXPERIENCE / STATS SECTION
+--------------------------------------------------------------- */
+.machinery-page .experience-section {
+  padding: 72px 0;
+  background: var(--m-dark);
+  position: relative;
+  overflow: hidden;
+}
+
+.machinery-page .experience-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(196,133,58,.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(196,133,58,.06) 1px, transparent 1px);
+  background-size: 48px 48px;
+  pointer-events: none;
+}
+
+.machinery-page .experience-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2px;
+  position: relative;
+  z-index: 1;
+}
+
+/* Experience card */
+.machinery-page .experience-card {
+  text-align: center;
+  padding: 40px 24px;
+  position: relative;
+  transition: background .25s var(--m-ease);
+}
+
+.machinery-page .experience-card::after {
+  content: '';
+  position: absolute;
+  right: 0; top: 20%; bottom: 20%;
+  width: 1px;
+  background: rgba(255,255,255,.08);
+}
+
+.machinery-page .experience-card:last-child::after {
+  display: none;
+}
+
+.machinery-page .experience-card:hover {
+  background: rgba(255,255,255,.03);
+}
+
+.machinery-page .experience-card h3 {
+  font-family: var(--m-font-display);
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  font-weight: 700;
+  color: var(--m-accent);
+  line-height: 1;
+  margin-bottom: 10px;
+  letter-spacing: -.02em;
+}
+
+.machinery-page .experience-card p {
+  font-size: .83rem;
+  font-weight: 500;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.55);
+  line-height: 1.45;
+}
+
+/* ---------------------------------------------------------------
+   CTA SECTION
+--------------------------------------------------------------- */
+.machinery-page .machinery-cta {
+  position: relative;
+  padding: 112px 0;
+  overflow: hidden;
+  background: var(--m-dark-2);
+}
+
+.machinery-page .machinery-cta-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: .25;
+}
+
+.machinery-page .machinery-cta-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(20,17,12,.88) 0%,
+    rgba(196,133,58,.18) 100%
+  );
+  z-index: 1;
+}
+
+.machinery-page .machinery-cta .container {
+  position: relative;
+  z-index: 2;
+}
+
+.machinery-page .machinery-cta-content {
+  max-width: 620px;
+  animation: mRevealUp .8s var(--m-ease) both;
+}
+
+.machinery-page .machinery-cta-content h2 {
+  font-family: var(--m-font-display);
+  font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+  font-weight: 700;
+  line-height: 1.2;
+  color: #fff;
+  margin-bottom: 16px;
+  margin-top: 8px;
+}
+
+.machinery-page .machinery-cta-content p {
+  font-size: .97rem;
+  line-height: 1.75;
+  color: rgba(255,255,255,.65);
+  margin-bottom: 36px;
+}
+
+.machinery-page .machinery-cta-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+/* ---------------------------------------------------------------
+   BACK TO TOP
+--------------------------------------------------------------- */
+.machinery-page .back-top {
+  position: fixed;
+  bottom: 32px;
+  right: 32px;
+  z-index: 999;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--m-accent);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 16px rgba(196,133,58,.45);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(16px) scale(.85);
+  transition:
+    opacity .3s var(--m-ease),
+    visibility .3s var(--m-ease),
+    transform .3s var(--m-ease-spring),
+    background .2s var(--m-ease);
+}
+
+.machinery-page .back-top.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0) scale(1);
+}
+
+.machinery-page .back-top:hover {
+  background: var(--m-accent-dark);
+  transform: translateY(-3px) scale(1.08);
+}
+
+/* ---------------------------------------------------------------
+   RESPONSIVE — TABLET  (max 1024px)
+--------------------------------------------------------------- */
+@media (max-width: 1024px) {
+  .machinery-page .container {
+    padding: 0 28px;
+  }
+
+  .machinery-page .machinery-hero-content {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .machinery-page .machinery-hero-right {
+    max-width: 520px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .machinery-page .earthmovers-layout {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .machinery-page .earthmovers-image {
+    max-width: 560px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .machinery-page .crusher-layout {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .machinery-page .crusher-image {
+    order: -1;
+    max-width: 480px;
+    margin: 0 auto;
+    width: 100%;
+    aspect-ratio: 16/9;
+  }
+
+  .machinery-page .workflow-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  .machinery-page .workflow-card:last-child {
+    grid-column: 1 / -1;
+    max-width: 480px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .machinery-page .experience-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1px;
+  }
+
+  .machinery-page .experience-card::after {
+    display: none;
+  }
+
+  .machinery-page .experience-card {
+    border-bottom: 1px solid rgba(255,255,255,.06);
+  }
+}
+
+/* ---------------------------------------------------------------
+   RESPONSIVE — MOBILE  (max 640px)
+--------------------------------------------------------------- */
+@media (max-width: 640px) {
+  .machinery-page .container {
+    padding: 0 18px;
+  }
+
+  /* Hero */
+  .machinery-page .machinery-hero {
+    min-height: auto;
+  }
+
+  .machinery-page .machinery-hero .container {
+    padding-top: 80px;
+    padding-bottom: 60px;
+  }
+
+  .machinery-page .machinery-hero-left h1 {
+    font-size: 1.85rem;
+  }
+
+  .machinery-page .machinery-hero-left p {
+    font-size: .92rem;
+  }
+
+  .machinery-page .machinery-hero-actions {
+    flex-direction: column;
+  }
+
+  .machinery-page .machinery-btn {
+    justify-content: center;
+    width: 100%;
+  }
+
+  /* Sections padding */
+  .machinery-page .earthmovers-section,
+  .machinery-page .crusher-section,
+  .machinery-page .workflow-section {
+    padding: 64px 0;
+  }
+
+  .machinery-page .section-heading {
+    margin-bottom: 36px;
+  }
+
+  /* Earth cards */
+  .machinery-page .earthmovers-grid {
+    gap: 14px;
+  }
+
+  .machinery-page .earth-card {
+    padding: 18px 20px;
+  }
+
+  /* Workflow */
+  .machinery-page .workflow-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .machinery-page .workflow-card:last-child {
+    max-width: 100%;
+  }
+
+  /* Experience */
+  .machinery-page .experience-section {
+    padding: 56px 0;
+  }
+
+  .machinery-page .experience-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .machinery-page .experience-card {
+    padding: 28px 12px;
+  }
+
+  /* CTA */
+  .machinery-page .machinery-cta {
+    padding: 72px 0;
+  }
+
+  .machinery-page .machinery-cta-content h2 {
+    font-size: 1.65rem;
+  }
+
+  .machinery-page .machinery-cta-actions {
+    flex-direction: column;
+  }
+
+  /* Back to top */
+  .machinery-page .back-top {
+    bottom: 20px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+  }
+}

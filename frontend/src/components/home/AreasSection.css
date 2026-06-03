@@ -1,0 +1,409 @@
+/* =========================================
+   SMS INFRA — AREAS SECTION
+   Font: Arial, sans-serif (matches site)
+   All classes scoped to .areas-section
+========================================= */
+
+/* =========================================
+   CSS VARIABLES
+========================================= */
+:root {
+  --areas-orange:        #ffa500;
+  --areas-orange-dim:    rgba(255, 165, 0, 0.12);
+  --areas-orange-border: rgba(255, 165, 0, 0.35);
+  --areas-orange-glow:   rgba(255, 165, 0, 0.22);
+  --areas-white:         #ffffff;
+  --areas-grey:          #aaaaaa;
+  --areas-card-bg:       rgba(255, 255, 255, 0.04);
+  --areas-card-border:   rgba(255, 255, 255, 0.09);
+  --areas-bg:            #0c0c0c;
+}
+
+/* =========================================
+   SECTION BASE
+========================================= */
+.areas-section {
+  position: relative;
+  background: var(--areas-bg);
+  padding: 100px 24px 80px;
+  text-align: center;
+  overflow: hidden;
+  margin-top: 0 !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* Subtle grid texture */
+.areas-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255, 165, 0, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 165, 0, 0.025) 1px, transparent 1px);
+  background-size: 60px 60px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Top divider glow */
+.areas-section::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 10%;
+  width: 80%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--areas-orange), transparent);
+  opacity: 0.35;
+}
+
+.areas-section > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* =========================================
+   SMALL TOP LABEL — "OUR SERVICE AREAS"
+========================================= */
+.areas-main-heading {
+  font-family: Arial, sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--areas-orange);
+  margin-bottom: 12px;
+  display: block;
+
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+/* Animated underline bar */
+.areas-main-heading::after {
+  content: "";
+  display: block;
+  width: 36px;
+  height: 2px;
+  margin: 8px auto 0;
+  background: var(--areas-orange);
+  border-radius: 2px;
+  animation: areas-pulse-bar 2.5s ease-in-out infinite;
+}
+
+@keyframes areas-pulse-bar {
+  0%, 100% { opacity: 0.5; width: 36px; }
+  50%       { opacity: 1;   width: 60px; }
+}
+
+/* =========================================
+   MAIN H2 TITLE
+   Matches: bold heavy Arial like hero section
+========================================= */
+.areas-section-title {
+  font-family: Arial, sans-serif;
+  font-size: clamp(26px, 4.5vw, 42px);
+  font-weight: 800;
+  color: var(--areas-white);
+  margin-bottom: 18px;
+  line-height: 1.2;
+  letter-spacing: -0.3px;
+
+  opacity: 1 !important;
+  transform: none !important;
+  visibility: visible !important;
+}
+
+/* =========================================
+   SUBTITLE
+========================================= */
+.areas-subtitle {
+  font-family: Arial, sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  color: var(--areas-grey);
+  max-width: 720px;
+  margin: 0 auto 28px;
+  line-height: 1.9;
+  padding: 0 12px;
+
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s ease 0.2s, transform 0.8s ease 0.2s;
+}
+
+/* =========================================
+   BADGE — hidden
+========================================= */
+.areas-badge {
+  display: none !important;
+}
+
+/* =========================================
+   CAROUSEL WRAPPER
+========================================= */
+.areas-wrapper {
+  position: relative;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 44px;
+}
+
+/* =========================================
+   SCROLL GRID
+========================================= */
+.areas-grid {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  padding: 16px 4px 24px;
+  cursor: grab;
+
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.areas-grid::-webkit-scrollbar {
+  display: none;
+}
+
+.areas-grid:active {
+  cursor: grabbing;
+}
+
+/* =========================================
+   AREA CARD
+========================================= */
+.areas-area-card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  min-width: 260px;
+  flex: 0 0 auto;
+  scroll-snap-align: center;
+
+  text-decoration: none;
+  color: var(--areas-white) !important;
+
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+
+  padding: 20px 22px;
+  border-radius: 12px;
+  overflow: hidden;
+
+  background: var(--areas-card-bg);
+  border: 1px solid var(--areas-card-border);
+  backdrop-filter: blur(10px);
+
+  box-shadow:
+    0 4px 20px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+
+  opacity: 0;
+  transform: translateY(40px);
+  transition:
+    opacity 0.5s ease,
+    transform 0.5s ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+/* Top orange accent stripe on hover */
+.areas-area-card::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--areas-orange), transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+/* Diagonal shimmer sweep */
+.areas-area-card::after {
+  content: "";
+  position: absolute;
+  top: -60%;
+  left: -120%;
+  width: 60%;
+  height: 200%;
+  background: linear-gradient(
+    105deg,
+    transparent,
+    rgba(255, 255, 255, 0.07),
+    transparent
+  );
+  transform: skewX(-20deg);
+  transition: left 0.65s ease;
+  pointer-events: none;
+}
+
+.areas-area-card:hover {
+  transform: translateY(-6px) scale(1.02);
+  border-color: var(--areas-orange-border);
+  color: var(--areas-white) !important;
+  box-shadow:
+    0 16px 40px rgba(0, 0, 0, 0.7),
+    0 0 18px var(--areas-orange-glow),
+    inset 0 1px 0 rgba(255, 255, 255, 0.07);
+}
+
+.areas-area-card:hover::before { opacity: 1; }
+.areas-area-card:hover::after  { left: 130%; }
+
+/* =========================================
+   ICON
+========================================= */
+.areas-area-icon {
+  color: var(--areas-orange);
+  font-size: 13px;
+  flex-shrink: 0;
+  transition: transform 0.3s ease;
+}
+
+.areas-area-card:hover .areas-area-icon {
+  transform: scale(1.2) translateY(-1px);
+}
+
+/* =========================================
+   ARROW BUTTONS
+========================================= */
+.areas-section .scroll-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-60%);
+  z-index: 10;
+
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid var(--areas-orange-border);
+  background: rgba(0, 0, 0, 0.65);
+  color: var(--areas-orange);
+  font-size: 20px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+  backdrop-filter: blur(6px);
+  transition: background 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+}
+
+.areas-section .scroll-btn:hover {
+  background: var(--areas-orange-dim);
+  box-shadow: 0 0 14px var(--areas-orange-glow);
+  transform: translateY(-60%) scale(1.1);
+}
+
+.areas-section .scroll-btn.left  { left: 0; }
+.areas-section .scroll-btn.right { right: 0; }
+
+/* =========================================
+   DOTS
+========================================= */
+.areas-section .dots {
+  margin-top: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+
+.areas-section .dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.18);
+  display: inline-block;
+  transition: all 0.3s ease;
+}
+
+.areas-section .dot.active {
+  background: var(--areas-orange);
+  width: 22px;
+  border-radius: 4px;
+  box-shadow: 0 0 8px var(--areas-orange-glow);
+}
+
+/* =========================================
+   SCROLL REVEAL — triggered by .show class
+========================================= */
+.areas-section.show .areas-main-heading {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.areas-section.show .areas-subtitle {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.areas-section.show .areas-area-card {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Stagger for 8 cards */
+.areas-section.show .areas-area-card:nth-child(1) { transition-delay: 0.10s; }
+.areas-section.show .areas-area-card:nth-child(2) { transition-delay: 0.18s; }
+.areas-section.show .areas-area-card:nth-child(3) { transition-delay: 0.26s; }
+.areas-section.show .areas-area-card:nth-child(4) { transition-delay: 0.34s; }
+.areas-section.show .areas-area-card:nth-child(5) { transition-delay: 0.42s; }
+.areas-section.show .areas-area-card:nth-child(6) { transition-delay: 0.50s; }
+.areas-section.show .areas-area-card:nth-child(7) { transition-delay: 0.58s; }
+.areas-section.show .areas-area-card:nth-child(8) { transition-delay: 0.66s; }
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+@media (max-width: 768px) {
+  .areas-section {
+    padding: 70px 16px 60px;
+  }
+
+  .areas-wrapper {
+    padding: 0 36px;
+  }
+
+  .areas-section-title {
+    font-size: 26px;
+  }
+
+  .areas-subtitle {
+    font-size: 14px;
+  }
+
+  .areas-area-card {
+    min-width: 74vw;
+    font-size: 13px;
+    padding: 18px 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .areas-section-title {
+    font-size: 22px;
+  }
+
+  .areas-area-card {
+    min-width: 82vw;
+  }
+
+  .areas-section .scroll-btn {
+    width: 30px;
+    height: 30px;
+    font-size: 16px;
+  }
+}

@@ -1,0 +1,101 @@
+/* 🔥 PAGE BASE */
+.area-page {
+  background: #0f0f0f;
+  color: #fff;
+  min-height: 100vh;
+}
+
+/* 🔥 HERO */
+.area-hero {
+  text-align: center;
+  padding: 100px 20px 60px;
+}
+
+.area-hero h1 {
+  font-size: 34px;
+  margin-bottom: 20px;
+}
+
+.area-hero p {
+  max-width: 750px;
+  margin: auto;
+  color: #ccc;
+  line-height: 1.8;
+}
+
+/* 🔥 SECTION */
+.area-section {
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.area-section h2 {
+  margin-bottom: 30px;
+  font-size: 26px;
+}
+
+/* 🔥 GRID */
+.area-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  max-width: 900px;
+  margin: auto;
+}
+
+/* 🔥 CARD */
+.area-card {
+  padding: 20px;
+  border-radius: 16px;
+
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+
+  transition: 0.3s;
+}
+
+.area-card:hover {
+  transform: translateY(-5px);
+  background: rgba(255,165,0,0.15);
+}
+
+/* 🔥 TEXT */
+.area-text {
+  max-width: 700px;
+  margin: auto;
+  color: #ccc;
+}
+
+/* 🔥 CTA */
+.area-cta {
+  text-align: center;
+  padding: 80px 20px;
+}
+
+.area-btn {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 12px 25px;
+
+  background: #1e3a8a;
+  color: #fff;
+  border-radius: 30px;
+  text-decoration: none;
+
+  transition: 0.3s;
+}
+
+.area-btn:hover {
+  background: #162d6b;
+}
+
+/* 🔥 MOBILE */
+@media (max-width: 768px) {
+  .area-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .area-hero h1 {
+    font-size: 24px;
+  }
+}

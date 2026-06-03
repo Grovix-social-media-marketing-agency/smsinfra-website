@@ -1,0 +1,400 @@
+.hero-container {
+  height: 100vh;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  transition: opacity 0.8s ease;   /* ⭐ for skip fade */
+}
+
+/* fade when skipping intro */
+.fade-out {
+  opacity: 0;
+}
+
+/* IMAGE SCREEN */
+.hero-bg {
+  height: 100%;
+  width: 100%;
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* LOGO SIZE */
+.hero-logo {
+  width: 620px;
+  max-width: 95%;
+  opacity: 0;
+}
+
+/* LOGO ANIMATION */
+.animate-logo {
+  animation: logoReveal 2s ease-out forwards;
+}
+
+@keyframes logoReveal {
+  0% {
+    opacity: 0;
+    transform: scale(0.7) translateY(60px);
+    filter: blur(8px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+    filter: blur(0);
+  }
+}
+
+/* VIDEO FULLSCREEN */
+.hero-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+
+  animation: videoFade 1.5s ease-in;
+
+  z-index: 1;          /* ⭐ VERY IMPORTANT */
+  pointer-events: none; /* ⭐ allows button click through video */
+}
+
+@keyframes videoFade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* ⭐⭐⭐ ADVANCED SKIP BUTTON ⭐⭐⭐ */
+
+.skip-btn {
+  position: absolute;
+  bottom: 50px;
+  right: 60px;
+
+  padding: 14px 32px;
+  font-size: 14px;
+  letter-spacing: 2px;
+  color: white;
+
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(10px);
+
+  border: 1px solid rgba(255,255,255,0.4);
+  border-radius: 30px;
+
+  cursor: pointer;
+  overflow: hidden;
+
+  opacity: 0;
+  transform: translateY(20px);
+  animation: skipFade 1s forwards;
+  animation-delay: 1.5s;
+
+  transition: all 0.35s ease;
+
+  z-index: 5;   /* ⭐ above video */
+}
+
+@keyframes skipFade {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Hover Premium Effect */
+.skip-btn:hover {
+  background: white;
+  color: black;
+  transform: scale(1.08);
+  box-shadow: 0 0 20px rgba(255,255,255,0.6);
+}
+
+/* Shine Sweep */
+.skip-btn::before {
+  content: "";
+  position: absolute;
+  height: 100%;
+  width: 40%;
+  background: rgba(255,255,255,0.4);
+  left: -60%;
+  top: 0;
+  transform: skewX(-20deg);
+  transition: 0.5s;
+}
+
+.skip-btn:hover::before {
+  left: 120%;
+}
+
+/* Arrow Motion */
+.skip-btn::after {
+  content: "→";
+  margin-left: 10px;
+  transition: 0.3s;
+}
+
+.skip-btn:hover::after {
+  margin-left: 18px;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+  .hero-logo {
+    width: 85%;
+  }
+
+  .skip-btn {
+    right: 30px;
+    bottom: 30px;
+    padding: 10px 22px;
+  }
+}
+.hero-glass-card{
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  background:rgba(255,255,255,0.08);
+  backdrop-filter:blur(16px);
+  border-radius:20px;
+  padding:50px 60px;
+  text-align:center;
+  color:white;
+  z-index:4;
+  width:600px;
+  max-width:90%;
+  box-shadow:0 0 40px rgba(0,0,0,0.4);
+  animation: cardFade 1.2s ease;
+}
+
+@keyframes cardFade{
+  from{opacity:0; transform:translate(-50%,-40%);}
+  to{opacity:1; transform:translate(-50%,-50%);}
+}
+
+.close-card{
+  position:absolute;
+  top:15px;
+  right:20px;
+  font-size:22px;
+  cursor:pointer;
+}
+
+.close-card:hover{
+  opacity:0.7;
+}
+.hero-cta-buttons{
+  display:flex;
+  justify-content:center;
+  gap:18px;
+  margin-top:25px;
+}
+
+/* ⭐ PRIMARY CTA */
+.quote-btn{
+  background: linear-gradient(45deg,#ff9d00,#ff6a00);
+  border:none;
+  padding:16px 36px;
+  color:white;
+  border-radius:40px;
+  font-size:18px;
+  font-weight:600;
+  cursor:pointer;
+  transition:0.35s;
+  box-shadow:0 8px 25px rgba(255,140,0,0.5);
+}
+
+.quote-btn:hover{
+  transform:translateY(-4px) scale(1.05);
+  box-shadow:0 15px 35px rgba(255,140,0,0.8);
+}
+
+/* ⭐ SECONDARY CTA (GLASS BUTTON) */
+.service-btn{
+  background: rgba(255,255,255,0.12);
+  border:2px solid rgba(255,255,255,0.6);
+  padding:16px 36px;
+  color:white;
+  border-radius:40px;
+  font-size:18px;
+  font-weight:500;
+  cursor:pointer;
+  transition:0.35s;
+  backdrop-filter:blur(6px);
+}
+
+.service-btn:hover{
+  background:white;
+  color:black;
+  transform:translateY(-4px) scale(1.05);
+  box-shadow:0 10px 25px rgba(255,255,255,0.6);
+}
+.hero-moving-services{
+  width:100%;
+  overflow:hidden;
+  margin:25px 0;
+  border-top:1px solid rgba(255,255,255,0.2);
+  border-bottom:1px solid rgba(255,255,255,0.2);
+  padding:12px 0;
+}
+
+.hero-moving-track{
+  display:inline-block;
+  white-space:nowrap;
+  font-size:18px;
+  animation: tickerMove 22s linear infinite;
+}
+
+.dot{
+  margin:0 14px;
+  color:#ff9d00;
+  text-shadow:0 0 10px orange;
+}
+
+@keyframes tickerMove{
+  from{ transform:translateX(0); }
+  to{ transform:translateX(-50%); }
+}
+/* MOBILE FIX */
+@media (max-width: 768px) {
+
+  .hero-advanced {
+    padding: 60px 20px;
+    height: auto;
+  }
+
+  .hero-title {
+    font-size: 2rem;
+    line-height: 1.2;
+  }
+
+  .hero-subtitle {
+    font-size: 1rem;
+  }
+
+  .hero-text {
+    font-size: 0.9rem;
+  }
+
+  .hero-content {
+    max-width: 100%;
+  }
+
+  .hero-stats {
+    position: static;
+    margin-top: 30px;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .stat-box {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+@media (max-width: 768px) {
+
+  /* 🔥 HERO CARD FIX */
+  .hero-glass-card {
+    width: 92%;
+    padding: 16px 12px;   /* slightly tighter */
+    border-radius: 16px;
+  }
+
+  /* 🔥 TITLE */
+  .hero-glass-card h1 {
+    font-size: 20px;
+    margin-bottom: 8px;
+  }
+
+  /* 🔥 MOVING TEXT */
+  .hero-moving-track {
+    font-size: 13px;
+    margin-bottom: 10px;
+  }
+
+  /* 🔥 BUTTON CONTAINER (IMPORTANT FIX) */
+  .hero-cta-buttons {
+    display: flex;              /* 🔥 force proper layout */
+    justify-content: center;
+    align-items: center;        /* 🔥 vertical alignment fix */
+    gap: 10px;
+    margin-top: 12px;
+  }
+
+  /* 🔥 BOTH BUTTONS EXACT MATCH */
+  .quote-btn,
+  .service-btn {
+    width: 140px;
+    height: 40px;
+
+    padding: 0 !important;
+    margin: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 13px;
+    line-height: 1;             /* 🔥 prevents text shift */
+
+    border-radius: 25px;
+    box-sizing: border-box;
+  }
+
+  /* 🔥 ORANGE BUTTON */
+  .quote-btn {
+    box-shadow: none;
+    border: none;
+  }
+
+  /* 🔥 OUTLINE BUTTON (REAL FIX HERE) */
+  .service-btn {
+    border: 2px solid rgba(255,255,255,0.7);
+  }
+
+}
+@media (max-width: 768px) {
+  .hero-container {
+    width: 100%;
+    height: 100svh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+  }
+}
+@media (max-width: 768px) {
+  .hero-video {
+    height: 100%;
+    width: auto;              /* 🔥 KEY CHANGE */
+    object-fit: cover;
+
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+.hero-video {
+  filter: brightness(0.85);
+}
+@media (max-width: 768px) {
+  .hero-video {
+    object-fit: contain;   /* 🔥 shows full video */
+    background: black;     /* 🔥 avoids empty gaps */
+  }
+}

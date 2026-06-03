@@ -1,0 +1,282 @@
+/* ================= ADVANCED INFRASTRUCTURE FOOTER ================= */
+.footer {
+  position: relative;
+  background-color: #050810;
+  color: #ffffff;
+  padding: 120px 5% 40px;
+  overflow: hidden;
+  z-index: 1;
+}
+
+/* 1. The Blueprint Grid Background Effect */
+.footer::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(rgba(251, 191, 36, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(251, 191, 36, 0.03) 1px, transparent 1px);
+  background-size: 50px 50px;
+  mask-image: radial-gradient(circle at 50% 0%, black, transparent 80%);
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* 2. Top "Beam of Light" */
+.footer::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  height: 2px;
+  background: radial-gradient(circle at center, #fbbf24, transparent 70%);
+  box-shadow: 0 0 20px rgba(251, 191, 36, 0.4);
+}
+
+/* ================= BRANDING SECTION ================= */
+.footer-top {
+  text-align: center;
+  margin-bottom: 80px;
+}
+
+.footer-logo {
+  height: 90px;
+  transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+  filter: drop-shadow(0 0 10px rgba(251, 191, 36, 0.1));
+}
+
+.footer-logo:hover {
+  transform: translateY(-5px) scale(1.02);
+}
+
+/* ONLY CHANGE: stroke opacity 0.6 → 0.95 for brighter gold */
+.footer-tagline {
+  font-size: clamp(1.4rem, 3.5vw, 2.2rem);
+  font-weight: 900;
+  letter-spacing: 10px;
+  text-transform: uppercase;
+  margin-top: 24px;
+  color: transparent;
+  -webkit-text-stroke: 1.2px rgba(251, 191, 36, 0.95);
+  position: relative;
+}
+
+/* ================= THE LINKS GRID (DESKTOP) ================= */
+.footer-links {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 50px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.footer-col h4 {
+  font-size: 1.05rem;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  color: #fbbf24;
+  margin-bottom: 30px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.footer-col h4::before {
+  content: "";
+  width: 5px;
+  height: 5px;
+  background: #fbbf24;
+  border-radius: 50%;
+  box-shadow: 0 0 10px #fbbf24;
+}
+
+.footer-col a {
+  display: block;
+  color: #cbd5e1;
+  text-decoration: none;
+  font-size: 1.05rem;
+  margin-bottom: 18px;
+  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+  position: relative;
+}
+
+.footer-col a:hover {
+  color: #fbbf24;
+  padding-left: 14px;
+  transform: translateX(5px);
+}
+
+.footer-col a::before {
+  content: "→";
+  position: absolute;
+  left: -20px;
+  opacity: 0;
+  transition: all 0.3s;
+  color: #fbbf24;
+}
+
+.footer-col a:hover::before {
+  left: 0;
+  opacity: 1;
+}
+
+/* ================= AUTHENTIC SOCIAL ICONS ================= */
+.footer-social {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin: 60px 0;
+}
+
+.footer-social a {
+  position: relative;
+  width: 55px;
+  height: 55px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.6rem;
+  color: #fff;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Real Instagram Glow & Colors */
+.footer-social a.insta-icon:hover {
+  background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+  transform: scale(1.15) translateY(-8px);
+  box-shadow: 0 12px 25px rgba(220, 39, 67, 0.4);
+  border-color: transparent;
+}
+
+/* Real LinkedIn Glow & Colors */
+.footer-social a.linkedin-icon:hover {
+  background: #0077b5;
+  transform: scale(1.15) translateY(-8px);
+  box-shadow: 0 12px 25px rgba(0, 119, 181, 0.4);
+  border-color: transparent;
+}
+
+/* ================= MOBILE OPTIMIZATION ================= */
+@media (max-width: 1024px) {
+  .footer-links {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .footer {
+    padding: 80px 5% 40px;
+  }
+  .footer-links {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 35px 15px;
+    align-items: start;
+  }
+  .footer-col {
+    padding: 10px;
+    background: transparent;
+    border: none;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+  }
+  .footer-col:last-child {
+    grid-column: span 1;
+    text-align: left;
+  }
+  .footer-col h4 {
+    margin-bottom: 20px;
+    font-size: 0.8rem;
+    justify-content: flex-start;
+  }
+  .footer-col a {
+    font-size: 0.8rem;
+    margin-bottom: 12px;
+    padding-left: 0;
+  }
+  .footer-tagline {
+    letter-spacing: 4px;
+    -webkit-text-stroke: 0.5px rgba(251, 191, 36, 0.5);
+    font-size: 1.1rem;
+    width: 100%;
+  }
+}
+
+/* ================= FOOTER BOTTOM BAR ================= */
+.footer-bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  padding-top: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  color: #94a3b8;
+  font-size: 0.9rem;
+}
+
+@media (max-width: 600px) {
+  .footer-bottom {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+.footer-credit span {
+  color: #fbbf24;
+  font-weight: bold;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+/* ================= CLEAN ICON STYLE ================= */
+.footer-social {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  margin: 50px 0;
+}
+
+/* remove box design */
+.footer-social a {
+  background: transparent;
+  border: none;
+  width: auto;
+  height: auto;
+  padding: 5px;
+}
+
+/* icon size */
+.footer-social a i {
+  font-size: 1.8rem;
+  transition: all 0.3s ease;
+}
+
+/* 🔥 Instagram color */
+.footer-social a[data-label="Instagram"] i {
+  color: #E1306C;
+}
+
+/* 🔥 LinkedIn color */
+.footer-social a[data-label="LinkedIn"] i {
+  color: #0077b5;
+}
+
+/* hover effect (like menu icon feel) */
+.footer-social a:hover i {
+  transform: translateY(-3px) scale(1.1);
+  opacity: 0.85;
+}
+.footer-subtext {
+  font-size: 0.82rem;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.30);
+  letter-spacing: 0.08em;
+  margin-top: 10px;
+}
