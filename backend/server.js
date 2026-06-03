@@ -23,7 +23,7 @@ import serviceHubRoutes from "./routes/serviceHubRoutes.js";
 // ⭐ ADMIN SERVICE PAGES CMS ROUTE (ADDED)
 import servicePagesRoutes from "./routes/servicePagesRoutes.js";
 // 🔔 LEADS ROUTE (ADDED)
-import leadsRoutes from "./routes/leadsRoutes.js";
+import leadsRoutes from "./routes/Leadsroutes.js";
 
 const app = express();
 
