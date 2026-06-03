@@ -14,7 +14,7 @@ import AdminServiceHub from "./AdminServiceHub";
 import AdminLeads from "./AdminLeads";
 
 const ADMIN_PASSWORD = "123456";
-const API = "http://10.145.35.253:5000/api";
+const API = "https://smsinfra-website.onrender.com/api";
 
 const DEFAULT_TICKER_ITEMS = [
   "Earthmovers","Ready Mix Concrete","Solid Blocks","Aggregates","M Sand & P Sand","Infrastructure Projects",

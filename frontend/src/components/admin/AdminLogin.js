@@ -246,25 +246,23 @@ function AdminLogin() {
     return () => clearInterval(id);
   }, [lampOn]);
 
-  /* turn lamp on */
-  const turnOn = () => {
-    if (lampOn) return;
-    setPulling(true);
-    setCordH(90);
-    setTimeout(() => {
-      setCordH(52);
-      setTimeout(() => {
-        setPulling(false);
-        setLampOn(true);
-        setTimeout(() => setFormVisible(true), 450);
-      }, 180);
-    }, 280);
-  };
-
-  /* mouse drag on cord */
+  /* mouse drag on cord — turnOn defined inside to satisfy exhaustive-deps */
   useEffect(() => {
     const cord = cordRef.current;
     if (!cord || lampOn) return;
+
+    const turnOn = () => {
+      setPulling(true);
+      setCordH(90);
+      setTimeout(() => {
+        setCordH(52);
+        setTimeout(() => {
+          setPulling(false);
+          setLampOn(true);
+          setTimeout(() => setFormVisible(true), 450);
+        }, 180);
+      }, 280);
+    };
 
     const onMouseDown = (e) => {
       startYRef.current = e.clientY;
