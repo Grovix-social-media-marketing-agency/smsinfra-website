@@ -28,7 +28,13 @@ import leadsRoutes from "./routes/Leadsroutes.js";
 const app = express();
 
 // 🔥 Middleware
-app.use(cors());
+app.use(cors({
+  origin: "*",
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+  credentials: false,
+}));
+app.options("*", cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -36,12 +42,10 @@ app.use(express.urlencoded({ extended: true }));
 app.get("/", (req, res) => {
   res.send("SMS INFRA Backend Running 🚀");
 });
-
 // ⭐ PING ROUTE — keeps backend awake on Render
 app.get("/ping", (req, res) => {
   res.status(200).json({ message: "Server is awake!" });
 });
-
 // 🔥 EXISTING ROUTES (UNCHANGED)
 app.use("/api/projects",      projectRoutes);
 app.use("/api/admin",         adminRoutes);
@@ -63,13 +67,11 @@ app.use("/api/servicehub",    serviceHubRoutes);
 app.use("/api/servicepages",  servicePagesRoutes);
 // 🔔 LEADS ROUTE — serves /api/leads
 app.use("/api/leads",         leadsRoutes);
-
 // 🔥 MongoDB Connection
 mongoose
   .connect(process.env.MONGO_URL)
   .then(() => console.log("MongoDB Connected ✅"))
   .catch((err) => console.log("Mongo Error:", err));
-
 // 🔥 Server Start
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
