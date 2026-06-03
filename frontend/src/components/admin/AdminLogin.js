@@ -326,7 +326,7 @@ function AdminLogin() {
     if (!form.email || !form.password) { setError("Please fill all fields"); return; }
     try {
       setLoading(true);
-      const res  = await fetch("http://localhost:5000/api/admin/login", {
+      const res = await fetch("https://smsinfra-website.onrender.com/api/admin/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email: form.email, password: form.password }),
@@ -349,7 +349,7 @@ function AdminLogin() {
     if (!form.email) { setError("Enter your email first"); return; }
     try {
       setLoading(true);
-      const res  = await fetch("http://localhost:5000/api/admin/forgot-password", {
+      const res = await fetch("https://smsinfra-website.onrender.com/api/admin/forgot-password", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email: form.email }),
