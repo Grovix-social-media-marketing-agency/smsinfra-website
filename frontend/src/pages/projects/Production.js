@@ -494,7 +494,7 @@ export default function ProductionUnit() {
               production supply across Bangalore.
             </p>
             <p className="cta-contact">
-              📞 +91 9448466238 &nbsp;|&nbsp; 7676590045 &nbsp;|&nbsp; 080 62179939
+              📞 +91 7676590081 &nbsp;
             </p>
             <div className="production-cta-actions">
               <Link to="/contact" className="production-btn primary">
