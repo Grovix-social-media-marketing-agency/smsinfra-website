@@ -24,9 +24,7 @@ import serviceHubRoutes from "./routes/serviceHubRoutes.js";
 import servicePagesRoutes from "./routes/servicePagesRoutes.js";
 // 🔔 LEADS ROUTE (ADDED)
 import leadsRoutes from "./routes/Leadsroutes.js";
-
 const app = express();
-
 // 🔥 Middleware
 app.use(cors({
   origin: "*",
@@ -34,10 +32,8 @@ app.use(cors({
   allowedHeaders: ["Content-Type", "Authorization"],
   credentials: false,
 }));
-app.options("*", cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
 // 🔥 Test route
 app.get("/", (req, res) => {
   res.send("SMS INFRA Backend Running 🚀");
