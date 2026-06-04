@@ -12,7 +12,7 @@ import './contact.css';
 const DRAFT_KEY = 'smsinfra_contact_draft';
 const OPEN_HOUR = 9;
 const CLOSE_HOUR = 19;
-const API = (process.env.REACT_APP_API_URL || 'http://10.145.35.253:5000').replace(/\/api$/, '');
+const API = (process.env.REACT_APP_API_URL || 'https://smsinfra-website.onrender.com').replace(/\/api$/, '');
 
 // ⭐ DEFAULT CONTACT PAGE CONTENT — shown while loading or if DB unreachable
 const DEFAULT_CONTACT = {
@@ -425,6 +425,7 @@ const Contact = () => {
 
   // ⭐ CMS content state — defaults shown while loading
   const [cms, setCms] = useState(DEFAULT_CONTACT);
+  // eslint-disable-next-line no-unused-vars
   const [cmsLoaded, setCmsLoaded] = useState(false);
 
   const { isOpen, hoursLeft, minsLeft } = useBusinessStatus();

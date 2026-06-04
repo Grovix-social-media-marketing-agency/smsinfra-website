@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-const API = (process.env.REACT_APP_API_URL || "http://10.145.35.253:5000").replace(/\/api$/, "");
+const API = (process.env.REACT_APP_API_URL || "https://smsinfra-website.onrender.com").replace(/\/api$/, "");
 
 export default function AdminLeads() {
   const [leads, setLeads]     = useState([]);
@@ -9,6 +9,19 @@ export default function AdminLeads() {
   const [toast, setToast]     = useState("");
 
   const showToast = (msg) => { setToast(msg); setTimeout(() => setToast(""), 3000); };
+
+  useEffect(() => {
+    const fetchLeads = async () => {
+      setLoading(true);
+      try {
+        const res  = await fetch(`${API}/api/leads`);
+        const data = await res.json();
+        setLeads(data);
+      } catch { showToast("Failed to load leads"); }
+      finally   { setLoading(false); }
+    };
+    fetchLeads();
+  }, []);
 
   const fetchLeads = async () => {
     setLoading(true);
@@ -19,8 +32,6 @@ export default function AdminLeads() {
     } catch { showToast("Failed to load leads"); }
     finally   { setLoading(false); }
   };
-
-  useEffect(() => { fetchLeads(); }, []);
 
   const markRead = async (id) => {
     await fetch(`${API}/api/leads/${id}/read`, { method: "PATCH" });
