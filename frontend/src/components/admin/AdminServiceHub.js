@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
 
-const API = (process.env.REACT_APP_API_URL || "http://10.145.35.253:5000").replace(/\/api$/, "");
+const API = (process.env.REACT_APP_API_URL || "https://smsinfra-website.onrender.com").replace(/\/api$/, "");
 
 const SECTION_TABS = ["hero", "intro", "stats", "services", "industries", "process", "whyus", "cta"];
 

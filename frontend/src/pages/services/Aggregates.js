@@ -20,7 +20,7 @@ import { useNavigate } from "react-router-dom";
 import "./Aggregates.css";
 
 // ─── API ──────────────────────────────────────────────────────────────────────
-const API = (process.env.REACT_APP_API_URL || "http://10.145.35.253:5000").replace(/\/api$/, "");
+const API = (process.env.REACT_APP_API_URL || "https://smsinfra-website.onrender.com").replace(/\/api$/, "");
 
 // ─── Static fallbacks (original hardcoded data) ───────────────────────────────
 const fallbackAggregateSizes = [

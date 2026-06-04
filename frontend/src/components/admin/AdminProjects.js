@@ -1,7 +1,7 @@
 // frontend/src/components/admin/AdminProjects.js
 import React, { useState, useEffect, useCallback } from "react";
 
-const API = (process.env.REACT_APP_API_URL || "http://10.145.35.253:5000").replace(/\/api$/, "");
+const API = (process.env.REACT_APP_API_URL || "https://smsinfra-website.onrender.com").replace(/\/api$/, "");
 
 const CATEGORIES = ["Residential", "Commercial", "Infrastructure", "Industrial", "Institutional"];
 const STATUSES   = ["completed", "ongoing", "upcoming"];
